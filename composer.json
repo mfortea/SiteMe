@@ -1,0 +1,19 @@
+{
+    "name": "Proyecto DAW",
+    "description": "Proyecto DAW",
+    "version": "1.0.0",
+    "type": "library",
+    "keywords": ["google", "places", "api"],
+    "homepage": "https://github.com/mfortea",
+    "license": "MIT",
+    "authors": [{
+        "name": "Mateo Fortea Dugo",
+        "email": "mforteadugo@gmail.com"
+    }],
+    "require": {
+        "joshtronic/php-googleplaces": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "joshtronic\\": "src/" }
+    }
+}

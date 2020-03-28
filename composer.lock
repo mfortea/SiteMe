@@ -1,0 +1,67 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "faf971e16bff34c68c0081ab3dd09dd9",
+    "packages": [
+        {
+            "name": "joshtronic/php-googleplaces",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joshtronic/php-googleplaces.git",
+                "reference": "08c811efbeec0e19342304e1a6b90c6679b2c6f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joshtronic/php-googleplaces/zipball/08c811efbeec0e19342304e1a6b90c6679b2c6f5",
+                "reference": "08c811efbeec0e19342304e1a6b90c6679b2c6f5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "joshtronic\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josh Sherman",
+                    "email": "josh@gravityblvd.com",
+                    "homepage": "http://joshtronic.com"
+                }
+            ],
+            "description": "PHP Wrapper for the Google Places API",
+            "homepage": "https://github.com/joshtronic/php-googleplaces",
+            "keywords": [
+                "api",
+                "google",
+                "places"
+            ],
+            "time": "2020-03-03T03:02:19+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "joshtronic/php-googleplaces": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
+}

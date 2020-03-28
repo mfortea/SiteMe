@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="icon" href="imagenes/favicon.png" type="image/png" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta content="Mateo Fortea" name="author" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <title>SiteMe</title>
+</head>
+
+<body onload="obtenerCoordenadas()">
+    <p id="estado">🔴 Ubicación desactivada</p>
+    <div id="formulario">
+        <img width="250px" src="imagenes/logo_letras.png"><br><br>
+        <input onclick="mostrarSelectRadio()" placeholder="¿Qué sitio buscas?" type="text" autocapitalize="sentences" id="inputBusqueda" name="inputBusqueda" />
+        <select id="radio">
+            <option value="1000">Radio de 1 kilómetros</option>
+            <option value="5000">Radio de 5 kilómetros</option>
+            <option value="10000">Radio de 10 kilómetros</option>
+            <option value="20000">Radio de 20 kilómetros</option>
+            <option value="30000">Radio de 30 kilómetros</option>
+      </select>
+        <br /><br />
+        <button class="botonBuscar" type="button" onclick="generarMapa()">Buscar</button>
+        </br>
+        </br>
+    </div>
+    <br />
+    <div id="map"></div>
+    <div id="principal"></div>
+    <footer>
+        SiteMe - <a href="https://github.com/mfortea">@mfortea</a>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+<!--
+    Buscar sitios cercanos:
+    https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurante&location=37.6867053,-5.1327931&radius=10000&key=AIzaSyDoDvzyGLNhrRvc7Q2shx5oapnmFtzy3Ts
+-->
