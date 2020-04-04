@@ -4,7 +4,7 @@
 // Variables globales
 var lat = 0;
 var lng = 0;
-
+var map = null;
 var json_cache = "";
 var estado_ubicacion = false;
 
@@ -19,16 +19,20 @@ function obtenerCoordenadas() {
         // Cacheo de errores relacionados con la ubicación
         switch (objPositionError.code) {
             case objPositionError.PERMISSION_DENIED:
-                alert("Debe permitir la ubicación para continuar");
+                document.getElementById("cuerpoModal").innerHTML = "Debe permitir la ubicación para continuar";
+                MicroModal.show('modal');
                 break;
             case objPositionError.POSITION_UNAVAILABLE:
-                alert("No se ha podido acceder a la información de su posición.");
+                document.getElementById("cuerpoModal").innerHTML = "No se ha podido acceder a la información de su posición.";
+                MicroModal.show('modal');
                 break;
             case objPositionError.TIMEOUT:
-                alert("El servicio ha tardado demasiado tiempo en responder.");
+                document.getElementById("cuerpoModal").innerHTML = "El servicio ha tardado demasiado tiempo en responder.";
+                MicroModal.show('modal');
                 break;
             default:
-                alert("Error desconocido.");
+                document.getElementById("cuerpoModal").innerHTML = "Error desconocido";
+                MicroModal.show('modal');
         }
     }, {
         maximumAge: 75000,
@@ -40,10 +44,17 @@ function generarMapa() {
 
     if (estado_ubicacion) {
 
+        if (map != undefined) {
+            map.off();
+            map.remove();
+            console.log("Mapa eliminado");
+        }
+
+
         document.getElementById('map').style.display = 'block';
 
         // Creación del mapa
-        var map = L.map('map').setView([lat, lng], 12);
+        map = L.map('map').setView([lat, lng], 12);
 
         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '',
@@ -112,7 +123,7 @@ function generarMapa() {
                             '<center>' +
                             '<img width="30px" src="' + json_cache.results[i].icon + '"/>' +
                             '<h2>' + json_cache.results[i].name + '</h2>' +
-                            '<p>' + json_cache.results[i].formatted_address + '</p>' +
+                            '<p>' + json_cache.results[i].vicinity + '</p>' +
                             '<button class="botonMarcador" onclick="nuevoFavorito(\'' + json_cache.results[i].id + '\')">⭐️</button>' +
                             '<button class="botonMarcador">👁</button>' +
                             '</center>'
@@ -130,7 +141,8 @@ function generarMapa() {
 
             })
     } else {
-        alert("No se ha podido determinar su ubicación");
+        document.getElementById("cuerpoModal").innerHTML = "No se ha podido determinar su ubicación";
+        MicroModal.show('modal');
     }
 }
 
