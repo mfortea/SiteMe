@@ -1,68 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
+    <!-- HOJAS DE ESTILOS -->
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link rel="stylesheet" type="text/css" href="css/micromodal.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <link rel="icon" href="imagenes/favicon.png" type="image/png" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta content="Mateo Fortea" name="author" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
-    <title>SiteMe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- SCRIPTS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <title>SiteMe - Inicio</title>
+
 </head>
 
-<body onload="obtenerCoordenadas()">
-    <div id="estado">🔴 Ubicación desactivada</div>
-    <div id="formulario">
-        <img width="250px" src="imagenes/logo_letras.png"><br><br>
-        <input onclick="mostrarSelectRadio()" placeholder="¿Qué sitio buscas?" type="text" autocapitalize="sentences" id="inputBusqueda" name="inputBusqueda" required />
-        <select id="radio" required>
-            <option value="1000">Radio de 1 kilómetros</option>
-            <option value="5000">Radio de 5 kilómetros</option>
-            <option value="10000">Radio de 10 kilómetros</option>
-            <option value="20000">Radio de 20 kilómetros</option>
-            <option value="30000">Radio de 30 kilómetros</option>
-      </select>
-        <br /><br />
-        <button class="botonBuscar" type="button" onclick="generarMapa()">Buscar</button>
-        </br>
-        </br>
+<body>
+    <div class="container-fluid">
+        <div class="banner-principal">
+            <img src="imagenes/logo_letras.png" width="250px" />
+            <br><br>
+            <h2>Tus sitios favoritos en un mismo lugar</h2>
+            <br>
+            <button onclick="window.location.href = 'login.html'" class="boton">Iniciar sesión</button>
+        </div>
     </div>
-    <br />
-    <div id="map"></div>
-    <div id="principal"></div>
-    <footer>
-        © SiteMe
+
+</body>
+
+<!-- PIE DE LA PÁGINA -->
+<footer class="text-center">
+    <p class="mt-5 mb-3 text-muted">&copy; SiteMe
         <script>
             document.write(new Date().getFullYear())
         </script>
-        - <a href="https://github.com/mfortea">@mfortea</a>
-    </footer>
-    <script src="script.js"></script>
-</body>
-
-<!-- Ventana modal para errores-->
-<div class="modal micromodal-slide" id="modal" aria-hidden="true">
-    <div class="modal__overlay" tabindex="-1">
-        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-            <header class="modal__header">
-                <h2 class="modal__title" id="modal-1-title">
-                    SiteMe
-                </h2>
-            </header>
-            <main class="modal__content" id="modal-1-content">
-                <h2 id="cuerpoModal"></h2>
-            </main>
-            <button class="modal__btn" data-micromodal-close aria-label="Cerrar">❌ Cerrar</button>
-        </div>
-    </div>
-</div>
+    </p>
+</footer>
 
 </html>
-
-<!--
-    Buscar sitios cercanos:
-    https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurante&location=37.6867053,-5.1327931&radius=10000&key=AIzaSyDoDvzyGLNhrRvc7Q2shx5oapnmFtzy3Ts
--->

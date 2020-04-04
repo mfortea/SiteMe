@@ -7,31 +7,36 @@ var lng = 0;
 var map = null;
 var json_cache = "";
 var estado_ubicacion = false;
+var arrayMarcadores = [];
 
 function obtenerCoordenadas() {
     if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function(pos) {
         lat = pos.coords.latitude;
         lng = pos.coords.longitude;
         estado_ubicacion = true;
-        document.getElementById("estado").innerHTML = "🟢 Ubicación activada";
-        document.getElementById("estado").style.color = "rgb(0, 164, 0)";
+        document.getElementById("estado").innerHTML = "Ubicación activada";
+        generarMapa();
     }, function(objPositionError) {
         // Cacheo de errores relacionados con la ubicación
         switch (objPositionError.code) {
             case objPositionError.PERMISSION_DENIED:
                 document.getElementById("cuerpoModal").innerHTML = "Debe permitir la ubicación para continuar";
+                document.getElementById("simboloModal").className = "fas fa-location-arrow fa-3x";
                 MicroModal.show('modal');
                 break;
             case objPositionError.POSITION_UNAVAILABLE:
                 document.getElementById("cuerpoModal").innerHTML = "No se ha podido acceder a la información de su posición.";
+                document.getElementById("simboloModal").className = "fas fa-location-arrow fa-3x";
                 MicroModal.show('modal');
                 break;
             case objPositionError.TIMEOUT:
                 document.getElementById("cuerpoModal").innerHTML = "El servicio ha tardado demasiado tiempo en responder.";
+                document.getElementById("simboloModal").className = "fas fa-clock fa-3x";
                 MicroModal.show('modal');
                 break;
             default:
                 document.getElementById("cuerpoModal").innerHTML = "Error desconocido";
+                document.getElementById("simboloModal").className = "fas fa-question-circle fa-3x";
                 MicroModal.show('modal');
         }
     }, {
@@ -40,18 +45,65 @@ function obtenerCoordenadas() {
     });
 }
 
+function buscar() {
+
+    if (map != undefined) {
+        map.off();
+        map.remove();
+        console.log("Mapa eliminado");
+        generarMapa();
+    }
+
+    // Icono de los marcadores de la búsqueda
+    var iconoUbBusqueda = L.icon({
+        iconUrl: 'imagenes/marcador_azul.png',
+        iconSize: [50, 50]
+    });
+
+
+    inputTexto = document.getElementById("inputBusqueda").value;
+    //radio = document.getElementById("radio").value;
+    var radio = "25000";
+
+    // Obtención de los datos de la búsqueda
+    fetch("servicioAPI.php?inputTexto=" + inputTexto + "&radio=" + radio + "&lat=" + lat + "&lng=" + lng)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(resultados) {
+
+            // Gestión de los resultados
+            json_cache = resultados;
+
+            for (var i = 0; i < json_cache.results.length; ++i) {
+                // Creación de los marcadores a partir de los datos
+                var marcador = L.marker([json_cache.results[i].geometry.location.lat, json_cache.results[i].geometry.location.lng], { icon: iconoUbBusqueda })
+                    .bindPopup(
+                        '<center>' +
+                        '<img width="30px" src="' + json_cache.results[i].icon + '"/>' +
+                        '<h2>' + json_cache.results[i].name + '</h2>' +
+                        '<p>' + json_cache.results[i].vicinity + '</p>' +
+                        '<button class="botonMarcador" onclick="nuevoFavorito(\'' + json_cache.results[i].id + '\')">⭐️</button>' +
+                        '<button class="botonMarcador">👁</button>' +
+                        '</center>'
+
+                    )
+                    .addTo(map);
+                arrayMarcadores.push(marcador);
+            }
+
+            // Adapta el zoom del mapa a todos los marcadores
+            var grupoMarcadores = L.featureGroup(arrayMarcadores).addTo(map);
+            setTimeout(function() {
+                map.fitBounds(grupoMarcadores.getBounds());
+            }, 500);
+
+        })
+}
+
 function generarMapa() {
 
     if (estado_ubicacion) {
-
-        if (map != undefined) {
-            map.off();
-            map.remove();
-            console.log("Mapa eliminado");
-        }
-
-
-        document.getElementById('map').style.display = 'block';
 
         // Creación del mapa
         map = L.map('map').setView([lat, lng], 12);
@@ -91,55 +143,10 @@ function generarMapa() {
             iconSize: [50, 50]
         });
 
-        // Icono de los marcadores de la búsqueda
-        var iconoUbBusqueda = L.icon({
-            iconUrl: 'imagenes/marcador_azul.png',
-            iconSize: [50, 50]
-        });
-
-        var arrayMarcadores = [];
-
         // Marcador de la ubicación actual
         var marcadorUbActual = L.marker([lat, lng], { icon: iconoUbActual }).bindPopup('<center><h2>Tu ubicación</h2></center>').addTo(map);
         arrayMarcadores.push(marcadorUbActual);
 
-        inputTexto = document.getElementById("inputBusqueda").value;
-        radio = document.getElementById("radio").value;
-
-        // Obtención de los datos de la búsqueda
-        fetch("servicioAPI.php?inputTexto=" + inputTexto + "&radio=" + radio + "&lat=" + lat + "&lng=" + lng)
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(resultados) {
-
-                // Gestión de los resultados
-                json_cache = resultados;
-
-                for (var i = 0; i < json_cache.results.length; ++i) {
-                    // Creación de los marcadores a partir de los datos
-                    var marcador = L.marker([json_cache.results[i].geometry.location.lat, json_cache.results[i].geometry.location.lng], { icon: iconoUbBusqueda })
-                        .bindPopup(
-                            '<center>' +
-                            '<img width="30px" src="' + json_cache.results[i].icon + '"/>' +
-                            '<h2>' + json_cache.results[i].name + '</h2>' +
-                            '<p>' + json_cache.results[i].vicinity + '</p>' +
-                            '<button class="botonMarcador" onclick="nuevoFavorito(\'' + json_cache.results[i].id + '\')">⭐️</button>' +
-                            '<button class="botonMarcador">👁</button>' +
-                            '</center>'
-
-                        )
-                        .addTo(map);
-                    arrayMarcadores.push(marcador);
-                }
-
-                // Adapta el zoom del mapa a todos los marcadores
-                var grupoMarcadores = L.featureGroup(arrayMarcadores).addTo(map);
-                setTimeout(function() {
-                    map.fitBounds(grupoMarcadores.getBounds());
-                }, 500);
-
-            })
     } else {
         document.getElementById("cuerpoModal").innerHTML = "No se ha podido determinar su ubicación";
         MicroModal.show('modal');

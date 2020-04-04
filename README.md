@@ -9,4 +9,7 @@ SiteMe es una aplicación web que permite al usuario descubrir establecimientos 
 SiteMe funciona haciendo uso de los siguientes frameworks o librerías:
 - API de Google Maps Sites
 - API de mapas de OpenStreetMaps
+- Framework Bootstrap 4 para el diseño responsive
 - Librería Leaflet para mostrar mapas
+- Librería Micromodal.js para usar ventanas modales
+- Iconos de FontAwesome
