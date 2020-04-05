@@ -21,6 +21,17 @@ nav {
     animation-duration: 1s;
 }
 
+
+/* Para navegadores que soporten el efecto blur */
+
+@supports (backdrop-filter: blur()) {
+    nav {
+        background-color: unset;
+        -webkit-backdrop-filter: saturate(180%) blur(40px);
+        backdrop-filter: saturate(180%) blur(40px);
+    }
+}
+
 @keyframes animacionMenu {
     0% {
         opacity: 0;
@@ -65,7 +76,7 @@ button {
     border-radius: 8px;
 }
 
-#cargando {
+.cargando {
     animation-name: animacionCargando;
     animation-duration: 1s;
     animation-iteration-count: infinite;
