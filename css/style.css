@@ -30,6 +30,16 @@ nav {
         -webkit-backdrop-filter: saturate(180%) blur(40px);
         backdrop-filter: saturate(180%) blur(40px);
     }
+    div>.leaflet-popup-tip {
+        background-color: unset;
+        -webkit-backdrop-filter: saturate(180%) blur(40px);
+        backdrop-filter: saturate(180%) blur(40px);
+    }
+    div>.leaflet-popup-content-wrapper {
+        background-color: unset;
+        -webkit-backdrop-filter: saturate(180%) blur(40px);
+        backdrop-filter: saturate(180%) blur(40px);
+    }
 }
 
 @keyframes animacionMenu {
@@ -229,19 +239,39 @@ button {
     }
 }
 
-.botonMarcador {
-    background-color: rgb(58, 58, 58);
-    border-radius: 5px;
-    border-style: none;
-    height: 40px;
-    margin: 3px;
+.botonFavorito {
+    color: #d39204;
+    background-color: unset;
     transition-duration: 0.2s;
     transition-timing-function: linear;
 }
 
-.botonMarcador:hover {
+.botonFavorito:hover {
     cursor: pointer;
-    background-color: grey;
+    color: #ffae00;
     transition-duration: 0.2s;
     transition-timing-function: linear;
+}
+
+.botonDetalles {
+    color: #032068;
+    background-color: unset;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+}
+
+.botonDetalles:hover {
+    cursor: pointer;
+    color: #0540d5;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+}
+
+.tituloPopup {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.detallesPopup {
+    font-size: 20px;
 }

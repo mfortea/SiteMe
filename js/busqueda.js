@@ -81,10 +81,10 @@ function buscar() {
                     .bindPopup(
                         '<center>' +
                         '<img width="30px" src="' + json_cache.results[i].icon + '"/>' +
-                        '<h2>' + json_cache.results[i].name + '</h2>' +
-                        '<p>' + json_cache.results[i].vicinity + '</p>' +
-                        '<button class="botonMarcador" onclick="nuevoFavorito(\'' + json_cache.results[i].id + '\')">⭐️</button>' +
-                        '<button class="botonMarcador">👁</button>' +
+                        '<p class="tituloPopup">' + json_cache.results[i].name + '</h2>' +
+                        '<p class="detallePopup">' + json_cache.results[i].vicinity + '</p>' +
+                        '<button class="botonFavorito" onclick="nuevoFavorito(\'' + json_cache.results[i].id + '\', \'' + json_cache.results[i].name + '\')"><i class="fas fa-2x fa-star"></i></button>' +
+                        '<button class="botonDetalles"><i class="fas fa-2x fa-info-circle"></i></button>' +
                         '</center>'
 
                     )
@@ -149,17 +149,20 @@ function generarMapa() {
         });
 
         // Marcador de la ubicación actual
-        var marcadorUbActual = L.marker([lat, lng], { icon: iconoUbActual }).bindPopup('<center><h2>Tu ubicación</h2></center>').addTo(map);
+        var marcadorUbActual = L.marker([lat, lng], { icon: iconoUbActual }).bindPopup('<p class="tituloPopup">Tu ubicación</h2>').addTo(map);
         arrayMarcadores.push(marcadorUbActual);
 
     } else {
         document.getElementById("cuerpoModal").innerHTML = "No se ha podido determinar su ubicación";
+        document.getElementById("simboloModal").className = "fas fa-location-arrow fa-3x";
         MicroModal.show('modal');
     }
 }
 
-function nuevoFavorito(id) {
-    alert("El id del sitio es " + id);
+function nuevoFavorito(id, nombre) {
+    document.getElementById("cuerpoModal").innerHTML = nombre + " se ha añadido tus favoritos";
+    document.getElementById("simboloModal").className = "fas fa-star fa-3x";
+    MicroModal.show('modal');
 }
 
 function mostrarSelectRadio() {
