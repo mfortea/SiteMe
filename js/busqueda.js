@@ -108,6 +108,11 @@ function generarMapa() {
         // Creación del mapa
         map = L.map('map').setView([lat, lng], 12);
 
+        // Crear control de pantalla completa
+        var fsControl = L.control.fullscreen();
+        map.addControl(fsControl);
+
+
         L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '',
             subdomains: ['a', 'b', 'c']
@@ -123,8 +128,8 @@ function generarMapa() {
         var googlesat = new L.TileLayer(gUrl, { maxZoom: 18, attribution: gAttribution });
 
         var baseLayers = {
-            'Mapa': osm,
-            'Satélite': googlesat
+            '<i class="fas fa-map-marked-alt"></i> Callejero': osm,
+            '<i class="fas fa-globe-europe"></i> Satélite': googlesat
         }
 
         L.control.layers(baseLayers, {}).addTo(map);
