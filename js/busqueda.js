@@ -22,21 +22,28 @@ function obtenerCoordenadas() {
             case objPositionError.PERMISSION_DENIED:
                 document.getElementById("cuerpoModal").innerHTML = "Debe permitir la ubicación para continuar";
                 document.getElementById("simboloModal").className = "fas fa-location-arrow fa-3x";
+                sonidoError();
                 MicroModal.show('modal');
                 break;
             case objPositionError.POSITION_UNAVAILABLE:
                 document.getElementById("cuerpoModal").innerHTML = "No se ha podido acceder a la información de su posición.";
                 document.getElementById("simboloModal").className = "fas fa-location-arrow fa-3x";
+                sonidoError();
+                vibrar(300);
                 MicroModal.show('modal');
                 break;
             case objPositionError.TIMEOUT:
                 document.getElementById("cuerpoModal").innerHTML = "El servicio ha tardado demasiado tiempo en responder.";
                 document.getElementById("simboloModal").className = "fas fa-clock fa-3x";
+                sonidoError();
+                vibrar(300);
                 MicroModal.show('modal');
                 break;
             default:
                 document.getElementById("cuerpoModal").innerHTML = "Error desconocido";
                 document.getElementById("simboloModal").className = "fas fa-question-circle fa-3x";
+                sonidoError();
+                vibrar(300);
                 MicroModal.show('modal');
         }
     }, {
@@ -46,6 +53,7 @@ function obtenerCoordenadas() {
 }
 
 function buscar() {
+    vibrar(50);
 
     if (map != undefined) {
         map.off();
@@ -162,9 +170,13 @@ function generarMapa() {
 function nuevoFavorito(id, nombre) {
     document.getElementById("cuerpoModal").innerHTML = nombre + " se ha añadido tus favoritos";
     document.getElementById("simboloModal").className = "fas fa-star fa-3x";
+    vibrar();
+    sonidoOK()
     MicroModal.show('modal');
 }
 
 function mostrarSelectRadio() {
     document.getElementById('radio').style.display = 'inline';
 }
+
+
