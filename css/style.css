@@ -24,7 +24,7 @@ nav {
 
 /* Para navegadores que soporten el efecto blur */
 
-@supports (backdrop-filter: blur()) {
+@supports (backdrop-filter: blur()) or (-webkit-backdrop-filter: blur()) {
     nav {
         background-color: unset;
         -webkit-backdrop-filter: saturate(180%) blur(40px);
