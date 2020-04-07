@@ -16,6 +16,6 @@ SiteMe funciona haciendo uso de los siguientes frameworks o librerías:
 
 ## Datos de prueba
 Para el entorno de desarrollo, las credenciales válidas son:
-Email: usuario@email.com
-Contraseña: usuario
-Rol: ROLE_USER
+- Email: usuario@email.com
+- Contraseña: usuario
+- Rol: ROLE_USER
