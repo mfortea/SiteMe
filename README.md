@@ -13,3 +13,9 @@ SiteMe funciona haciendo uso de los siguientes frameworks o librerías:
 - Librería Leaflet para mostrar mapas
 - Librería Micromodal.js para usar ventanas modales
 - Iconos de FontAwesome
+
+## Datos de prueba
+Para el entorno de desarrollo, las credenciales válidas son:
+Email: usuario@email.com
+Contraseña: usuario
+Rol: ROLE_USER
