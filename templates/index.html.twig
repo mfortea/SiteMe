@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block titulo %}{{ parent() }}{% endblock %}
+{% block pwa %}
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SiteMe">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/icon-152x152.png">
+    <meta name="msapplication-TileImage" content="/images/icons/icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#1c9b6a">
+    <meta name="theme-color" content="#c6c6c6">
+{% endblock %}
+
+{% block body %}
+
+ <noscript>
+        <h2>El uso de Javascript es necesario</h2>
+    </noscript>
+    <div class="container-fluid">
+        <div class="banner-principal">
+            <img alt="Logo de SiteMe" src="imagenes/logo_letras.png" width="250px" />
+            <br><br>
+            <h2>Tus sitios favoritos en un mismo lugar</h2>
+            <br>
+            <button onclick="window.location.href = '{{ path('app_login') }}'" class="boton">Iniciar sesión</button>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker
+                    .register('{{ asset('service-worker.js') }}')
+                    .then(reg => console.log('[Service Worker] * Registrado.'))
+                    .catch(err => console.log(`[Service Worker] * Error: ${err}`));
+            });
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+{% endblock %}

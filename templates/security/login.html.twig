@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block titulo %}{{ parent() }} - Iniciar sesión{% endblock %}
+
+{% block body %}
+
+<body class="text-center body-login">
+
+
+    {% if app.user %}
+        <div class="mb-3">
+            Has inciado sesión como {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    <form class="form-login" method="POST">
+        <a href='{{ path('index') }}'><img class="mb-4" src="imagenes/logo_letras.png" alt="Logo de SiteMe" height="72" /></a>
+        <h1 class="h3 mb-3 ">Iniciar sesión</h1>
+
+        <label for="inputEmail" class="sr-only">Correo electrónico</label>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Correo electrónico" required autofocus />
+
+        <label for="inputPassword" class="sr-only">Contraseña</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+
+        <div class="checkbox mb-3"><label><input type="checkbox" name="_remember_me"> Recordarme</label></div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+      <button class="boton-login" type="submit">
+        Iniciar sesión
+      </button>
+        <p class="mt-5 mb-3 text-muted">&copy; SiteMe - {{ "now"|date("Y") }}
+        </p>
+    </form>
+</body>
+
+    {% endblock %}

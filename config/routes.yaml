@@ -1,0 +1,12 @@
+index:
+    path: /
+    controller: App\Controller\MainController::index
+
+busqueda:
+    path: /busqueda
+    controller: App\Controller\MainController::busqueda
+
+buscarLugares:
+    path: /buscarLugares
+    controller: App\Controller\ApiController::buscarLugares
+    methods: ["POST"]
