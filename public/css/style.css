@@ -244,6 +244,24 @@ button {
     }
 }
 
+@media screen and (max-width: 500px) {
+    .boton-login {
+        width: 100%;
+    }
+    .input-busqueda {
+        width: 100%;
+    }
+    #img-index {
+        width: 100%;
+    }
+    .boton {
+        width: 100%;
+    }
+    .cargando {
+        font-size: 20px;
+    }
+}
+
 .botonFavorito {
     color: #d39204;
     background-color: unset;
