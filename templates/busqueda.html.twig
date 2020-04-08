@@ -44,16 +44,18 @@
         <div class="container-fluid mt-5 text-center">
             <h1>¿Qué sitios buscas?</h1>
             <br>
+            <form action="javascript:buscar()">
             <div class="row">
                 <div class="col-sm-12">
-                    <input disabled id="input-busqueda" class="input-busqueda mb-3 text-center" placeholder="Por ejemplo: Restaurantes" type="text" id="inputBusqueda" name="inputBusqueda" required />
+                    <input disabled class="input-busqueda mb-3 text-center" placeholder="Por ejemplo: Restaurantes" type="text" id="input-busqueda" name="input-busqueda" required />
                 </div>
 
                 <div class="col-sm-12">
-                    <button disabled id="boton-buscar" class="boton" type="button" onclick="buscar()">Buscar</button>
+                    <button disabled id="boton-buscar" class="boton" type="submit">Buscar</button>
                 </div>
                 <br>
             </div>
+            </form>
             <br><br>
             <div id="map">
                 <h3 id="cargando" class="cargando text-center mt-5"><i class="fas fa-hourglass-half"></i> &nbsp; Cargando mapa...</h3>

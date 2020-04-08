@@ -73,7 +73,7 @@ function buscar() {
     });
 
 
-    inputTexto = document.getElementById("inputBusqueda").value;
+    inputTexto = document.getElementById("input-busqueda").value;
     //radio = document.getElementById("radio").value;
     var radio = "25000";
 
