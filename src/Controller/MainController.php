@@ -17,4 +17,9 @@ class MainController extends AbstractController
         return $this->render('busqueda.html.twig');
     }
 
+    public function sitios()
+    {
+        return $this->render('sitios.html.twig');
+    }
+
 }

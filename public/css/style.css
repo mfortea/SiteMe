@@ -21,6 +21,10 @@ nav {
     animation-duration: 1s;
 }
 
+.navbar-nav .dropdown-menu {
+    position: absolute !important;
+}
+
 
 /* Para navegadores que soporten el efecto blur */
 
@@ -36,11 +40,6 @@ nav {
         backdrop-filter: saturate(180%) blur(40px);
     }
     div>.leaflet-popup-content-wrapper {
-        background-color: unset;
-        -webkit-backdrop-filter: saturate(180%) blur(40px);
-        backdrop-filter: saturate(180%) blur(40px);
-    }
-    .dropdown-menu {
         background-color: unset;
         -webkit-backdrop-filter: saturate(180%) blur(40px);
         backdrop-filter: saturate(180%) blur(40px);
@@ -227,9 +226,10 @@ button {
 /* ESTILOS DE BUSQUEDA */
 
 #map {
+    /*
     border-style: solid;
     border-color: #03793e;
-    border-width: 2px;
+    border-width: 2px;*/
     display: block;
     border-radius: 10px;
     width: 80%;

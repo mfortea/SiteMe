@@ -6,6 +6,10 @@ busqueda:
     path: /busqueda
     controller: App\Controller\MainController::busqueda
 
+sitios:
+    path: /sitios
+    controller: App\Controller\MainController::sitios
+
 buscarLugares:
     path: /buscarLugares
     controller: App\Controller\ApiController::buscarLugares

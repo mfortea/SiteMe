@@ -52,69 +52,7 @@ function obtenerCoordenadas() {
     });
 }
 
-function buscar(url) {
-    vibrar(50);
 
-    if (map != undefined) {
-        map.off();
-        map.remove();
-        console.log("Mapa eliminado");
-        generarMapa();
-    }
-
-    // Icono de los marcadores de la búsqueda
-    var iconoUbBusqueda = L.icon({
-        iconUrl: 'imagenes/marcador_azul.png',
-        iconSize: [50, 50]
-    });
-
-
-    inputTexto = document.getElementById("inputBusqueda").value;
-    //radio = document.getElementById("radio").value;
-    var radio = "25000";
-
-    var datos = { texto: inputTexto, radio: radio, lat: lat, lng: lng };
-
-    // Obtención de los datos de la búsqueda
-    fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(datos),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(function(response) {
-            return response.json();
-        })
-        .then(function(resultados) {
-
-            // Gestión de los resultados
-            json_cache = resultados;
-
-            for (var i = 0; i < json_cache.results.length; ++i) {
-                // Creación de los marcadores a partir de los datos
-                var marcador = L.marker([json_cache.results[i].geometry.location.lat, json_cache.results[i].geometry.location.lng], { icon: iconoUbBusqueda })
-                    .bindPopup(
-                        '<center>' +
-                        '<img width="30px" src="' + json_cache.results[i].icon + '"/>' +
-                        '<p class="tituloPopup">' + json_cache.results[i].name + '</h2>' +
-                        '<p class="detallePopup">' + json_cache.results[i].vicinity + '</p>' +
-                        '<button class="botonFavorito" onclick="nuevoFavorito(\'' + json_cache.results[i].id + '\', \'' + json_cache.results[i].name + '\')"><i class="fas fa-2x fa-star"></i></button>' +
-                        '<button class="botonDetalles"><i class="fas fa-2x fa-info-circle"></i></button>' +
-                        '</center>'
-
-                    )
-                    .addTo(map);
-                arrayMarcadores.push(marcador);
-            }
-
-            // Adapta el zoom del mapa a todos los marcadores
-            var grupoMarcadores = L.featureGroup(arrayMarcadores).addTo(map);
-            setTimeout(function() {
-                map.fitBounds(grupoMarcadores.getBounds());
-            }, 500);
-
-        })
-}
 
 function generarMapa() {
 
@@ -172,16 +110,4 @@ function generarMapa() {
         document.getElementById("simboloModal").className = "fas fa-location-arrow fa-3x";
         MicroModal.show('modal');
     }
-}
-
-function nuevoFavorito(id, nombre) {
-    document.getElementById("cuerpoModal").innerHTML = nombre + " se ha añadido tus favoritos";
-    document.getElementById("simboloModal").className = "fas fa-star fa-3x";
-    vibrar(300);
-    sonidoOK()
-    MicroModal.show('modal');
-}
-
-function mostrarSelectRadio() {
-    document.getElementById('radio').style.display = 'inline';
 }
