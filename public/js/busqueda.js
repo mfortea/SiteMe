@@ -18,6 +18,7 @@ function obtenerCoordenadas() {
         document.getElementById('boton-buscar').disabled = false;
         document.getElementById('input-busqueda').disabled = false;
         document.getElementById('cargando').style.display = "block";
+        document.getElementById('map').style.display = "block";
         generarMapa();
     }, function(objPositionError) {
         // Cacheo de errores relacionados con la ubicación

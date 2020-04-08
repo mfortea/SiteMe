@@ -249,7 +249,7 @@ button {
     border-style: solid;
     border-color: #03793e;
     border-width: 2px;*/
-    display: block;
+    display: none;
     border-radius: 10px;
     width: 80%;
     height: 500px;
