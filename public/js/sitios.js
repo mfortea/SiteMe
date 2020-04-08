@@ -15,6 +15,8 @@ function obtenerCoordenadas() {
         lng = pos.coords.longitude;
         estado_ubicacion = true;
         document.getElementById("estado").innerHTML = "Ubicación activada";
+        document.getElementById('cargando').style.display = "block";
+        document.getElementById('map').style.display = "block";
         generarMapa();
     }, function(objPositionError) {
         // Cacheo de errores relacionados con la ubicación
