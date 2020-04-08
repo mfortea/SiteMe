@@ -52,7 +52,7 @@ function obtenerCoordenadas() {
     });
 }
 
-function buscar(url) {
+function buscar() {
     vibrar(50);
 
     if (map != undefined) {
@@ -76,7 +76,7 @@ function buscar(url) {
     var datos = { texto: inputTexto, radio: radio, lat: lat, lng: lng };
 
     // Obtención de los datos de la búsqueda
-    fetch(url, {
+    fetch("/buscarLugares", {
             method: 'POST',
             body: JSON.stringify(datos),
             headers: {
@@ -86,9 +86,8 @@ function buscar(url) {
             return response.json();
         })
         .then(function(resultados) {
-
             // Gestión de los resultados
-            json_cache = resultados;
+            json_cache = JSON.parse(resultados);
 
             for (var i = 0; i < json_cache.results.length; ++i) {
                 // Creación de los marcadores a partir de los datos
@@ -180,8 +179,4 @@ function nuevoFavorito(id, nombre) {
     vibrar(300);
     sonidoOK()
     MicroModal.show('modal');
-}
-
-function mostrarSelectRadio() {
-    document.getElementById('radio').style.display = 'inline';
 }
