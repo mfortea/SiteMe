@@ -81,6 +81,14 @@ button {
     width: 300px;
 }
 
+.input-busqueda:disabled,
+.input-busqueda[disabled] {
+    cursor: default;
+    background-color: #cccccc;
+    color: #666666;
+    border-color: #cccccc;
+}
+
 #radio {
     height: 40px;
     border-color: #4d7662;
@@ -91,6 +99,7 @@ button {
 }
 
 .cargando {
+    display: none;
     animation-name: animacionCargando;
     animation-duration: 1s;
     animation-iteration-count: infinite;
@@ -148,6 +157,16 @@ button {
 .boton:hover {
     background-color: #75b797;
     transition: 0.5s;
+}
+
+.boton:disabled,
+.boton[disabled] {
+    cursor: default;
+    background-color: #cccccc;
+    color: #666666;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 
