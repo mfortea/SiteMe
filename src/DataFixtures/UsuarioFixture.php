@@ -22,7 +22,7 @@ class UsuarioFixture extends Fixture {
             $usuario,
             'usuario'
         ) );
-        $usuario->setRoles( array( 'ADMIN' ) );
+        $usuario->setRoles( array( 'ROLE_USER' ) );
         $manager->persist( $usuario );
         $manager->flush();
     }
