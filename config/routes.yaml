@@ -12,5 +12,5 @@ sitios:
 
 buscarLugares:
     path: /buscarLugares
-    controller: App\Controller\ApiController::buscarLugares
+    controller: App\Controller\MainController::buscarLugares
     methods: ["POST"]

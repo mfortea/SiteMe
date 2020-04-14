@@ -73,35 +73,37 @@ function buscar() {
     });
 
 
-    inputTexto = document.getElementById("input-busqueda").value;
+    var busqueda = document.getElementById("input-busqueda").value;
     //radio = document.getElementById("radio").value;
     var radio = "25000";
 
-    var datos = { texto: inputTexto, radio: radio, lat: lat, lng: lng };
+    var datos = { busqueda: busqueda, radio: radio, lat: lat, lng: lng };
+    var json = JSON.stringify(datos);
 
     // Obtención de los datos de la búsqueda
     fetch("/buscarLugares", {
             method: 'POST',
-            body: JSON.stringify(datos),
+            body: json,
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(function(response) {
             return response.json();
+
         })
         .then(function(resultados) {
             // Gestión de los resultados
             json_cache = JSON.parse(resultados);
 
-            for (var i = 0; i < json_cache.results.length; ++i) {
+            for (var i = 0; i < json_cache.sitios.length; ++i) {
                 // Creación de los marcadores a partir de los datos
-                var marcador = L.marker([json_cache.results[i].geometry.location.lat, json_cache.results[i].geometry.location.lng], { icon: iconoUbBusqueda })
+                var marcador = L.marker([json_cache.sitios[i].latitud, json_cache.sitios[i].longitud], { icon: iconoUbBusqueda })
                     .bindPopup(
                         '<center>' +
-                        '<img width="30px" src="' + json_cache.results[i].icon + '"/>' +
-                        '<p class="tituloPopup">' + json_cache.results[i].name + '</h2>' +
-                        '<p class="detallePopup">' + json_cache.results[i].vicinity + '</p>' +
-                        '<button class="botonFavorito" onclick="nuevoFavorito(\'' + json_cache.results[i].id + '\', \'' + json_cache.results[i].name + '\')"><i class="fas fa-2x fa-star"></i></button>' +
+                        '<img width="30px" src="' + json_cache.sitios[i].icono + '"/>' +
+                        '<p class="tituloPopup">' + json_cache.sitios[i].nombre + '</h2>' +
+                        '<p class="detallePopup">' + json_cache.sitios[i].direccion + '</p>' +
+                        '<button class="botonFavorito" onclick="nuevoFavorito(\'' + json_cache.sitios[i].id + '\', \'' + json_cache.sitios[i].nombre + '\')"><i class="fas fa-2x fa-star"></i></button>' +
                         '<button class="botonDetalles"><i class="fas fa-2x fa-info-circle"></i></button>' +
                         '</center>'
 
