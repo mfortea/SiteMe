@@ -89,11 +89,10 @@ function buscar() {
             }
         }).then(function(response) {
             return response.json();
-
         })
         .then(function(resultados) {
             // Gestión de los resultados
-            json_cache = JSON.parse(resultados);
+            json_cache = resultados;
 
             for (var i = 0; i < json_cache.sitios.length; ++i) {
                 // Creación de los marcadores a partir de los datos
