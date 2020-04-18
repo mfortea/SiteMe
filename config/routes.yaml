@@ -14,3 +14,8 @@ buscarLugares:
     path: /buscarLugares
     controller: App\Controller\MainController::buscarLugares
     methods: ["POST"]
+
+nuevoFavorito:
+    path: /nuevoFavorito
+    controller: App\Controller\MainController::nuevoFavorito
+    methods: ["POST"]

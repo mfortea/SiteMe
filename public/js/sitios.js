@@ -68,7 +68,7 @@ function generarMapa() {
         map.addControl(fsControl);
 
 
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '',
             subdomains: ['a', 'b', 'c']
         }).addTo(map);
@@ -78,7 +78,7 @@ function generarMapa() {
             '.org">&copy; OpenStreetMap</a>';
         var osm = new L.TileLayer(osmUrl, { maxZoom: 18, attribution: osmAttribution });
 
-        var gUrl = 'http://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}';
+        var gUrl = 'https://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}';
         var gAttribution = '&copy; Google Maps';
         var googlesat = new L.TileLayer(gUrl, { maxZoom: 18, attribution: gAttribution });
 

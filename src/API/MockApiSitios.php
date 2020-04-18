@@ -1055,7 +1055,7 @@ class MockApiSitios implements IApiSitios {
   
               $sitio = $objJson->results[$i];
   
-              $id = $sitio->id;
+              $id = $i;
               $latitud = $sitio->geometry->location->lat;
               $longitud = $sitio->geometry->location->lng;
               $nombre = $sitio->name;

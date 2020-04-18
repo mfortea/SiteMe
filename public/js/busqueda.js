@@ -102,7 +102,7 @@ function buscar() {
                         '<img width="30px" src="' + json_cache.sitios[i].icono + '"/>' +
                         '<p class="tituloPopup">' + json_cache.sitios[i].nombre + '</h2>' +
                         '<p class="detallePopup">' + json_cache.sitios[i].direccion + '</p>' +
-                        '<button class="botonFavorito" onclick="nuevoFavorito(\'' + json_cache.sitios[i].id + '\', \'' + json_cache.sitios[i].nombre + '\')"><i class="fas fa-2x fa-star"></i></button>' +
+                        '<button class="botonFavorito" onclick="nuevoFavorito(\'' + json_cache.sitios[i].id + '\')"><i class="fas fa-2x fa-star"></i></button>' +
                         '<button class="botonDetalles"><i class="fas fa-2x fa-info-circle"></i></button>' +
                         '</center>'
 
@@ -132,7 +132,7 @@ function generarMapa() {
         map.addControl(fsControl);
 
 
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '',
             subdomains: ['a', 'b', 'c']
         }).addTo(map);
@@ -142,7 +142,7 @@ function generarMapa() {
             '.org">&copy; OpenStreetMap</a>';
         var osm = new L.TileLayer(osmUrl, { maxZoom: 18, attribution: osmAttribution });
 
-        var gUrl = 'http://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}';
+        var gUrl = 'https://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}';
         var gAttribution = '&copy; Google Maps';
         var googlesat = new L.TileLayer(gUrl, { maxZoom: 18, attribution: gAttribution });
 
@@ -178,10 +178,29 @@ function generarMapa() {
     }
 }
 
-function nuevoFavorito(id, nombre) {
-    document.getElementById("cuerpoModal").innerHTML = nombre + " se ha añadido tus favoritos";
-    document.getElementById("simboloModal").className = "fas fa-star fa-3x";
-    vibrar(300);
-    sonidoOK()
-    MicroModal.show('modal');
+function nuevoFavorito(id) {
+
+    var nombre = json_cache.sitios[id].nombre;
+    var icono = json_cache.sitios[id].icono;
+    var direccion = json_cache.sitios[id].direccion;
+    var favorito = { id: id, nombre: nombre, icono: icono, direccion: direccion };
+    var json = JSON.stringify(favorito);
+
+    fetch("/nuevoFavorito", {
+            method: 'POST',
+            body: json,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function(response) {
+            return response.json();
+        })
+        .then(function(respuesta) {
+            document.getElementById("cuerpoModal").innerHTML = nombre + " se ha añadido tus favoritos";
+            document.getElementById("simboloModal").className = "fas fa-star fa-3x";
+            vibrar(300);
+            sonidoOK()
+            MicroModal.show('modal');
+        });
+
 }

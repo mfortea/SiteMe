@@ -29,7 +29,7 @@ class GMapsApiSitios implements IApiSitios {
 
             $sitio = $arrayResultados;
 
-            $id = $sitio[$i]['id'];
+            $id = $i;
             $latitud = $sitio[$i]['geometry']['location']['lat'];
             $longitud = $sitio[$i]['geometry']['location']['lng'];
             $nombre = $sitio[$i]['name'];

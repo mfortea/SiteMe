@@ -36,6 +36,15 @@ class MainController extends AbstractController {
         return new JsonResponse( $sitiosService->getSitios( $latitud, $longitud, $busqueda, $radio ) );
     }
 
+    public function nuevoFavorito ( Request $request ) {
+
+        $json_raw = $request->getContent();
+        $json = json_decode($json_raw);
+
+        return new JsonResponse(200);
+
+    }
+
     public function sitios() {
         return $this->render( 'sitios.html.twig' );
     }
