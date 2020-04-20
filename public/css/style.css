@@ -34,16 +34,6 @@ nav {
         -webkit-backdrop-filter: saturate(180%) blur(40px);
         backdrop-filter: saturate(180%) blur(40px);
     }
-    div>.leaflet-popup-tip {
-        background-color: unset;
-        -webkit-backdrop-filter: saturate(180%) blur(40px);
-        backdrop-filter: saturate(180%) blur(40px);
-    }
-    div>.leaflet-popup-content-wrapper {
-        background-color: unset;
-        -webkit-backdrop-filter: saturate(180%) blur(40px);
-        backdrop-filter: saturate(180%) blur(40px);
-    }
 }
 
 @keyframes animacionMenu {
@@ -315,5 +305,15 @@ button {
 }
 
 .detallesPopup {
-    font-size: 20px;
+    font-size: 15px !important;
+}
+
+.leaflet-popup-close-button {
+    font: 20px Tahoma, Verdana, sans-serif !important;
+    width: 25px !important;
+    color: red !important;
+}
+
+.leaflet-popup-close-button:hover {
+    font-weight: bold !important;
 }

@@ -103,7 +103,6 @@ function buscar() {
                         '<p class="tituloPopup">' + json_cache.sitios[i].nombre + '</h2>' +
                         '<p class="detallePopup">' + json_cache.sitios[i].direccion + '</p>' +
                         '<button class="botonFavorito" onclick="nuevoFavorito(\'' + json_cache.sitios[i].id + '\')"><i class="fas fa-2x fa-star"></i></button>' +
-                        '<button class="botonDetalles"><i class="fas fa-2x fa-info-circle"></i></button>' +
                         '</center>'
 
                     )
