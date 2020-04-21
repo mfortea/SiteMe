@@ -24,3 +24,8 @@ obtenerFavoritos:
     path: /obtenerFavoritos
     controller: App\Controller\MainController::obtenerFavoritos
     methods: ["GET"]
+
+eliminarFavorito:
+    path: /eliminarFavorito/{id_sitio}
+    controller: App\Controller\MainController::eliminarFavorito
+    methods: ["DELETE"]

@@ -103,9 +103,9 @@ function buscar() {
                         '<img width="30px" src="' + json_cache.sitios[i].icono + '"/>' +
                         '<p class="tituloPopup">' + json_cache.sitios[i].nombre + '</p>' +
                         '<p class="detallePopup">' + json_cache.sitios[i].direccion + '</p>' +
-                        '<p class="distanciaPopup"><i class="fas fa-directions"></i> A ' + medirDistancia(lat,lng,json_cache.sitios[i].latitud,json_cache.sitios[i].longitud) + ' kilómetros</p>' +
-                        '<button class="botonFavorito" onclick="nuevoFavorito(\'' + json_cache.sitios[i].id + '\')"><i class="fas fa-2x fa-star"></i></button>' +
-                       // '<button class="botonRuta" onclick="calcularRuta(\'' + json_cache.sitios[i].latitud + '\', \'' + json_cache.sitios[i].longitud + '\')"><i class="fas fa-2x fa-directions"></i></button>' +
+                        '<p class="distanciaPopup"><i class="fas fa-directions"></i> A ' + medirDistancia(lat, lng, json_cache.sitios[i].latitud, json_cache.sitios[i].longitud) + ' kilómetros</p>' +
+                        '<button class="botonFavorito" onclick="nuevoFavorito(\'' + i + '\')"><i class="fas fa-2x fa-star"></i></button>' +
+                        // '<button class="botonRuta" onclick="calcularRuta(\'' + json_cache.sitios[i].latitud + '\', \'' + json_cache.sitios[i].longitud + '\')"><i class="fas fa-2x fa-directions"></i></button>' +
                         '</center>'
 
                     )
@@ -180,13 +180,13 @@ function generarMapa() {
     }
 }
 
-function nuevoFavorito(id) {
-
-    var nombre = json_cache.sitios[id].nombre;
-    var latitud = json_cache.sitios[id].latitud;
-    var longitud = json_cache.sitios[id].longitud;
-    var icono = json_cache.sitios[id].icono;
-    var direccion = json_cache.sitios[id].direccion;
+function nuevoFavorito(posicion) {
+    var id = json_cache.sitios[posicion].id;
+    var nombre = json_cache.sitios[posicion].nombre;
+    var latitud = json_cache.sitios[posicion].latitud;
+    var longitud = json_cache.sitios[posicion].longitud;
+    var icono = json_cache.sitios[posicion].icono;
+    var direccion = json_cache.sitios[posicion].direccion;
     var favorito = { id: id, nombre: nombre, latitud: latitud, longitud: longitud, icono: icono, direccion: direccion };
     var json = JSON.stringify(favorito);
 
@@ -197,15 +197,20 @@ function nuevoFavorito(id) {
             'Content-Type': 'application/json'
         }
     }).then(function (response) {
-        return response.json();
-    })
-        .then(function (respuesta) {
+        if (response.status === 409) {
+            document.getElementById("cuerpoModal").innerHTML = nombre + " ya está en tus favoritos";
+            document.getElementById("simboloModal").className = "fas fa-exclamation-circle fa-3x";
+            vibrar(300);
+            sonidoError()
+            MicroModal.show('modal');
+        } else if (response.status === 200) {
             document.getElementById("cuerpoModal").innerHTML = nombre + " se ha añadido tus favoritos";
             document.getElementById("simboloModal").className = "fas fa-star fa-3x";
             vibrar(300);
             sonidoOK()
             MicroModal.show('modal');
-        });
+        }
+    })
 
 }
 

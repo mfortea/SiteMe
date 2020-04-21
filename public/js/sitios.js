@@ -5,7 +5,6 @@
 var lat = 0;
 var lng = 0;
 var map = null;
-var json_cache = "";
 var estado_ubicacion = false;
 var arrayMarcadores = [];
 
@@ -137,18 +136,16 @@ function obtenerFavoritos() {
     })
         .then(function (resultados) {
             // Gestión de los resultados
-            json_cache = resultados;
-
-            for (var i = 0; i < json_cache.sitios.length; ++i) {
+            for (var i = 0; i < resultados.sitios.length; ++i) {
                 // Creación de los marcadores a partir de los datos
-                var marcador = L.marker([json_cache.sitios[i].latitud, json_cache.sitios[i].longitud], { icon: iconoUbBusqueda })
+                var marcador = L.marker([resultados.sitios[i].latitud, resultados.sitios[i].longitud], { icon: iconoUbBusqueda })
                     .bindPopup(
                         '<center>' +
-                        '<img width="30px" src="' + json_cache.sitios[i].icono + '"/>' +
-                        '<p class="tituloPopup">' + json_cache.sitios[i].nombre + '</p>' +
-                        '<p class="detallePopup">' + json_cache.sitios[i].direccion + '</p>' +
-                        '<p class="distanciaPopup"><i class="fas fa-directions"></i> A ' + medirDistancia(lat, lng, json_cache.sitios[i].latitud, json_cache.sitios[i].longitud) + ' kilómetros</p>' +
-                        '<button class="botonEliminar" onclick="eliminarFavorito(\'' + json_cache.sitios[i].nombre + '\')"><i class="fas fa-2x fa-trash-alt"></i></button>' +
+                        '<img width="30px" src="' + resultados.sitios[i].icono + '"/>' +
+                        '<p class="tituloPopup">' + resultados.sitios[i].nombre + '</p>' +
+                        '<p class="detallePopup">' + resultados.sitios[i].direccion + '</p>' +
+                        '<p class="distanciaPopup"><i class="fas fa-directions"></i> A ' + medirDistancia(lat, lng, resultados.sitios[i].latitud, resultados.sitios[i].longitud) + ' kilómetros</p>' +
+                        '<button class="botonEliminar" onclick="eliminarFavorito(\'' + resultados.sitios[i].id + '\')"><i class="fas fa-2x fa-trash-alt"></i></button>' +
                         '</center>'
 
                     )
@@ -175,4 +172,29 @@ function medirDistancia(lat1, lon1, lat2, lon2) {
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
     return d.toFixed(2);
+}
+
+function eliminarFavorito(id) {
+
+    fetch('/eliminarFavorito/' + id, {
+        method: 'DELETE'
+    }).then(function (response) {
+        if (response.status === 204) {
+            document.getElementById("cuerpoModal").innerHTML = "Se ha eliminado correctamente";
+            document.getElementById("simboloModal").className = "fas fa-trash-alt fa-3x";
+            vibrar(300);
+            sonidoOK()
+            MicroModal.show('modal');
+            map.off();
+            map.remove();
+            console.log("Mapa eliminado");
+            obtenerCoordenadas();
+        } else if (response.status === 404) {
+            document.getElementById("cuerpoModal").innerHTML = "No se ha podido eliminar el sitio";
+            document.getElementById("simboloModal").className = "fas fa-times fa-3x";
+            sonidoError();
+            vibrar(300);
+            MicroModal.show('modal');
+        }
+    })
 }
