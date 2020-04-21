@@ -33,6 +33,11 @@ class Usuario implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Favorito", mappedBy="usuario", orphanRemoval=true)
+     */
+    private $favoritos;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -109,5 +114,35 @@ class Usuario implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Favorito[]
+     */
+    public function getFavoritos(): Collection
+    {
+        return $this->favoritos;
+    }
+
+    public function addFavorito(Favorito $favorito): self
+    {
+        if (!$this->favoritos->contains($favorito)) {
+            $this->favoritos[] = $favorito;
+            $favorito->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorito(Favorito $favorito): self
+    {
+        if ($this->favoritos->contains($favorito)) {
+            $this->favoritos->removeElement($favorito);
+            if ($favorito->getUsuario() === $this) {
+                $favorito->setUsuario(null);
+            }
+        }
+
+        return $this;
     }
 }

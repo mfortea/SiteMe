@@ -28,7 +28,7 @@ class UsuarioRepository extends ServiceEntityRepository implements PasswordUpgra
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
         if (!$user instanceof Usuario) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+            throw new UnsupportedUserException(sprintf('Instancias de "%s" no son soportadas.', \get_class($user)));
         }
 
         $user->setPassword($newEncodedPassword);
