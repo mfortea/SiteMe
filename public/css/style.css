@@ -271,6 +271,11 @@ button {
     }
 }
 
+.leaflet-popup-content {
+    line-height: 1 !important;
+    width: 250px !important;
+}
+
 .botonFavorito {
     color: #d39204;
     background-color: unset;
@@ -302,10 +307,16 @@ button {
 .tituloPopup {
     font-size: 20px;
     font-weight: bold;
+    text-align: center;
 }
 
 .detallesPopup {
     font-size: 15px !important;
+}
+
+.distanciaPopup {
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .leaflet-popup-close-button {

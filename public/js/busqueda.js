@@ -5,12 +5,13 @@
 var lat = 0;
 var lng = 0;
 var map = null;
+var rutas = null;
 var json_cache = "";
 var estado_ubicacion = false;
 var arrayMarcadores = [];
 
 function obtenerCoordenadas() {
-    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function(pos) {
+    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function (pos) {
         lat = pos.coords.latitude;
         lng = pos.coords.longitude;
         estado_ubicacion = true;
@@ -20,7 +21,7 @@ function obtenerCoordenadas() {
         document.getElementById('cargando').style.display = "block";
         document.getElementById('map').style.display = "block";
         generarMapa();
-    }, function(objPositionError) {
+    }, function (objPositionError) {
         // Cacheo de errores relacionados con la ubicación
         switch (objPositionError.code) {
             case objPositionError.PERMISSION_DENIED:
@@ -82,15 +83,15 @@ function buscar() {
 
     // Obtención de los datos de la búsqueda
     fetch("/buscarLugares", {
-            method: 'POST',
-            body: json,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(function(response) {
-            return response.json();
-        })
-        .then(function(resultados) {
+        method: 'POST',
+        body: json,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(function (response) {
+        return response.json();
+    })
+        .then(function (resultados) {
             // Gestión de los resultados
             json_cache = resultados;
 
@@ -100,9 +101,11 @@ function buscar() {
                     .bindPopup(
                         '<center>' +
                         '<img width="30px" src="' + json_cache.sitios[i].icono + '"/>' +
-                        '<p class="tituloPopup">' + json_cache.sitios[i].nombre + '</h2>' +
+                        '<p class="tituloPopup">' + json_cache.sitios[i].nombre + '</p>' +
                         '<p class="detallePopup">' + json_cache.sitios[i].direccion + '</p>' +
+                        '<p class="distanciaPopup"><i class="fas fa-directions"></i> A ' + medirDistancia(lat,lng,json_cache.sitios[i].latitud,json_cache.sitios[i].longitud) + ' kilómetros</p>' +
                         '<button class="botonFavorito" onclick="nuevoFavorito(\'' + json_cache.sitios[i].id + '\')"><i class="fas fa-2x fa-star"></i></button>' +
+                       // '<button class="botonRuta" onclick="calcularRuta(\'' + json_cache.sitios[i].latitud + '\', \'' + json_cache.sitios[i].longitud + '\')"><i class="fas fa-2x fa-directions"></i></button>' +
                         '</center>'
 
                     )
@@ -112,7 +115,7 @@ function buscar() {
 
             // Adapta el zoom del mapa a todos los marcadores
             var grupoMarcadores = L.featureGroup(arrayMarcadores).addTo(map);
-            setTimeout(function() {
+            setTimeout(function () {
                 map.fitBounds(grupoMarcadores.getBounds());
             }, 500);
 
@@ -186,15 +189,15 @@ function nuevoFavorito(id) {
     var json = JSON.stringify(favorito);
 
     fetch("/nuevoFavorito", {
-            method: 'POST',
-            body: json,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(function(response) {
-            return response.json();
-        })
-        .then(function(respuesta) {
+        method: 'POST',
+        body: json,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(function (response) {
+        return response.json();
+    })
+        .then(function (respuesta) {
             document.getElementById("cuerpoModal").innerHTML = nombre + " se ha añadido tus favoritos";
             document.getElementById("simboloModal").className = "fas fa-star fa-3x";
             vibrar(300);
@@ -203,3 +206,43 @@ function nuevoFavorito(id) {
         });
 
 }
+
+function medirDistancia(lat1, lon1, lat2, lon2) {
+    rad = function (x) { return x * Math.PI / 180; }
+    var R = 6378.137; //Radio de la tierra en km
+    var dLat = rad(lat2 - lat1);
+    var dLong = rad(lon2 - lon1);
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c;
+    return d.toFixed(2);
+}
+
+
+/*
+function calcularRuta(latDestino, lngDestino) {
+
+    if (rutas != null) {
+        rutas.remove();
+        console.log("Ruta anterior eliminada");
+    }
+
+    map.closePopup();
+
+    rutas = L.Routing.control({
+        waypoints: [
+            L.latLng(lat, lng),
+            L.latLng(latDestino, lngDestino)
+        ],
+        language: 'es',
+        routeWhileDragging: true,
+        fitSelectedRoutes: 'smart',
+        router: new L.Routing.OSRMv1({
+            serviceUrl: url_to_your_service
+        })
+    })
+
+    rutas.addTo(map);
+}
+
+*/
