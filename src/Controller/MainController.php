@@ -9,6 +9,9 @@ use Psr\Log\LoggerInterface;
 use App\Service\SitiosService;
 use App\API\GMapsApiSitios;
 use App\API\MockApiSitios;
+use App\Entity\Usuario;
+use App\Entity\Favorito;
+use \stdClass;
 
 class MainController extends AbstractController {
 
@@ -41,8 +44,72 @@ class MainController extends AbstractController {
         $json_raw = $request->getContent();
         $json = json_decode($json_raw);
 
-        return new JsonResponse(200);
+        $id_sitio = $json->id;
+        $nombre = $json->nombre;
+        $latitud = $json->latitud;
+        $longitud = $json->longitud;
+        $icono = $json->icono;
+        $direccion =  $json->direccion;
 
+        $entityManager = $this->getDoctrine()->getManager();
+        $favorito = new Favorito();
+        $usuario = $this->get('security.token_storage')->getToken()->getUser();
+
+        /*
+        foreach ($usuario->getFavoritos() as $sitio) {
+            if ($sitio->getNombre() == $nombre) {
+                return new JsonResponse([
+                    'error' => 'El sitio ya está en tus favoritos'
+                    ], 409);
+            }
+        }
+        */
+
+        $favorito->setUsuario($usuario);
+        $favorito->setIdSitio($id_sitio);
+        $favorito->setNombre($nombre);
+        $favorito->setLatitud($latitud);
+        $favorito->setLongitud($longitud);
+        $favorito->setIcono($icono);
+        $favorito->setDireccion($direccion);
+
+        $entityManager->persist($favorito);
+        $entityManager->flush();
+
+        return new JsonResponse(200);
+    }
+
+    public function obtenerFavoritos(){
+        $entityManager = $this->getDoctrine()->getManager();
+        $usuario = $this->get('security.token_storage')->getToken()->getUser();
+        $favoritos = $entityManager->getRepository(Favorito::class)->findByUsuario($usuario);
+
+        $respuesta = new stdClass();
+        $numSitios = count( $favoritos );
+
+        for ( $i = 0; $i<$numSitios; $i++ ) {
+
+            $sitio = $favoritos;
+
+            $id = $favoritos[$i]->getIdSitio();
+            $latitud = $favoritos[$i]->getLatitud();
+            $longitud = $favoritos[$i]->getLongitud();
+            $nombre = $favoritos[$i]->getNombre();
+            $icono = $favoritos[$i]->getIcono();
+            $direccion = $favoritos[$i]->getDireccion();
+
+            $objeto = new stdClass();
+            $objeto->id = $id;
+            $objeto->latitud = $latitud;
+            $objeto->longitud = $longitud;
+            $objeto->nombre = $nombre;
+            $objeto->icono = $icono;
+            $objeto->direccion = $direccion;
+
+            $respuesta->sitios[$i] = $objeto;
+        }
+
+        return new JsonResponse($respuesta, 200);
     }
 
     public function sitios() {

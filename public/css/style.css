@@ -290,6 +290,20 @@ button {
     transition-timing-function: linear;
 }
 
+.botonEliminar {
+    color: #940606;
+    background-color: unset;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+}
+
+.botonEliminar:hover {
+    cursor: pointer;
+    color: #ff0000;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+}
+
 .botonDetalles {
     color: #032068;
     background-color: unset;

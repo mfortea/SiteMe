@@ -24,4 +24,4 @@ security:
 
     access_control:
         - { path: ^/busqueda, roles: "ROLE_USER" }
-        #- { path: ^/buscarLugares, roles: "ROLE_USER" }
+        - { path: ^/buscarLugares, roles: "ROLE_USER" }

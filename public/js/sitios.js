@@ -10,7 +10,7 @@ var estado_ubicacion = false;
 var arrayMarcadores = [];
 
 function obtenerCoordenadas() {
-    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function(pos) {
+    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function (pos) {
         lat = pos.coords.latitude;
         lng = pos.coords.longitude;
         estado_ubicacion = true;
@@ -18,7 +18,7 @@ function obtenerCoordenadas() {
         document.getElementById('cargando').style.display = "block";
         document.getElementById('map').style.display = "block";
         generarMapa();
-    }, function(objPositionError) {
+    }, function (objPositionError) {
         // Cacheo de errores relacionados con la ubicación
         switch (objPositionError.code) {
             case objPositionError.PERMISSION_DENIED:
@@ -107,9 +107,72 @@ function generarMapa() {
         var marcadorUbActual = L.marker([lat, lng], { icon: iconoUbActual }).bindPopup('<p class="tituloPopup">Tu ubicación</h2>').addTo(map);
         arrayMarcadores.push(marcadorUbActual);
 
+        obtenerFavoritos();
+
+
     } else {
         document.getElementById("cuerpoModal").innerHTML = "No se ha podido determinar su ubicación";
         document.getElementById("simboloModal").className = "fas fa-location-arrow fa-3x";
         MicroModal.show('modal');
     }
+}
+
+
+function obtenerFavoritos() {
+
+    // Icono de los marcadores
+    var iconoUbBusqueda = L.icon({
+        iconUrl: 'imagenes/marcador_azul.png',
+        iconSize: [50, 50]
+    });
+
+    // Obtención de los sitios favoritos del usuario
+    fetch("/obtenerFavoritos", {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(function (response) {
+        return response.json();
+    })
+        .then(function (resultados) {
+            // Gestión de los resultados
+            json_cache = resultados;
+
+            for (var i = 0; i < json_cache.sitios.length; ++i) {
+                // Creación de los marcadores a partir de los datos
+                var marcador = L.marker([json_cache.sitios[i].latitud, json_cache.sitios[i].longitud], { icon: iconoUbBusqueda })
+                    .bindPopup(
+                        '<center>' +
+                        '<img width="30px" src="' + json_cache.sitios[i].icono + '"/>' +
+                        '<p class="tituloPopup">' + json_cache.sitios[i].nombre + '</p>' +
+                        '<p class="detallePopup">' + json_cache.sitios[i].direccion + '</p>' +
+                        '<p class="distanciaPopup"><i class="fas fa-directions"></i> A ' + medirDistancia(lat, lng, json_cache.sitios[i].latitud, json_cache.sitios[i].longitud) + ' kilómetros</p>' +
+                        '<button class="botonEliminar" onclick="eliminarFavorito(\'' + json_cache.sitios[i].nombre + '\')"><i class="fas fa-2x fa-trash-alt"></i></button>' +
+                        '</center>'
+
+                    )
+                    .addTo(map);
+                arrayMarcadores.push(marcador);
+            }
+
+            // Adapta el zoom del mapa a todos los marcadores
+            var grupoMarcadores = L.featureGroup(arrayMarcadores).addTo(map);
+            setTimeout(function () {
+                map.fitBounds(grupoMarcadores.getBounds());
+            }, 500);
+
+        })
+
+}
+
+function medirDistancia(lat1, lon1, lat2, lon2) {
+    rad = function (x) { return x * Math.PI / 180; }
+    var R = 6378.137; //Radio de la tierra en km
+    var dLat = rad(lat2 - lat1);
+    var dLong = rad(lon2 - lon1);
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c;
+    return d.toFixed(2);
 }

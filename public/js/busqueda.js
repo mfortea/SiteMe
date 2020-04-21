@@ -183,9 +183,11 @@ function generarMapa() {
 function nuevoFavorito(id) {
 
     var nombre = json_cache.sitios[id].nombre;
+    var latitud = json_cache.sitios[id].latitud;
+    var longitud = json_cache.sitios[id].longitud;
     var icono = json_cache.sitios[id].icono;
     var direccion = json_cache.sitios[id].direccion;
-    var favorito = { id: id, nombre: nombre, icono: icono, direccion: direccion };
+    var favorito = { id: id, nombre: nombre, latitud: latitud, longitud: longitud, icono: icono, direccion: direccion };
     var json = JSON.stringify(favorito);
 
     fetch("/nuevoFavorito", {

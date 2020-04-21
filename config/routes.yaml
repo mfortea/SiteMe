@@ -19,3 +19,8 @@ nuevoFavorito:
     path: /nuevoFavorito
     controller: App\Controller\MainController::nuevoFavorito
     methods: ["POST"]
+
+obtenerFavoritos:
+    path: /obtenerFavoritos
+    controller: App\Controller\MainController::obtenerFavoritos
+    methods: ["GET"]
