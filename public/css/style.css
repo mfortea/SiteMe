@@ -25,7 +25,6 @@ nav {
     position: absolute !important;
 }
 
-
 /* Para navegadores que soporten el efecto blur */
 
 @supports (backdrop-filter: blur()) or (-webkit-backdrop-filter: blur()) {
@@ -33,6 +32,15 @@ nav {
         background-color: unset;
         -webkit-backdrop-filter: saturate(180%) blur(40px);
         backdrop-filter: saturate(180%) blur(40px);
+    }
+    .modal__overlay{
+        -webkit-backdrop-filter: saturate(100%) blur(15px);
+        backdrop-filter: saturate(100%) blur(15px);
+    }
+    .modal__container{
+        -webkit-box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
     }
 }
 
@@ -71,8 +79,7 @@ button {
     width: 300px;
 }
 
-.input-busqueda:disabled,
-.input-busqueda[disabled] {
+.input-busqueda:disabled, .input-busqueda[disabled] {
     cursor: default;
     background-color: #cccccc;
     color: #666666;
@@ -108,7 +115,6 @@ button {
     }
 }
 
-
 /* ESTILOS DE INICIO */
 
 .banner-principal {
@@ -118,6 +124,20 @@ button {
     animation-name: animacionBanner;
     animation-duration: 1s;
 }
+
+.banner-principal h2 {
+    font-size: 40px;
+}
+
+
+@media screen and (max-width: 640px) {
+    .banner-principal h2 {
+        font-size: 30px;
+    }
+}
+
+
+
 
 @keyframes animacionBanner {
     0% {
@@ -149,8 +169,7 @@ button {
     transition: 0.5s;
 }
 
-.boton:disabled,
-.boton[disabled] {
+.boton:disabled, .boton[disabled] {
     cursor: default;
     background-color: #cccccc;
     color: #666666;
@@ -159,6 +178,50 @@ button {
     box-shadow: none;
 }
 
+.caracteristicas .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.caracteristicas h2 {
+    font-weight: 400;
+}
+
+.caracteristicas .col-lg-4 p {
+    margin-right: .75rem;
+    margin-left: .75rem;
+}
+
+.divisor {
+    margin: 5rem 0;
+}
+
+.divisor-pequeno {
+    margin: 2rem 0;
+}
+
+.caracteristica-cabecera {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.05rem;
+}
+
+.subindice {
+    color: rgb(155, 155, 155);
+    font-style: italic;
+}
+
+@media (min-width: 40em) {
+    .caracteristica-cabecera {
+        font-size: 50px;
+    }
+}
+
+@media (min-width: 62em) {
+    .caracteristica-cabecera {
+        margin-top: 7rem;
+    }
+}
 
 /* ESTILOS DEL LOGIN */
 
@@ -230,7 +293,6 @@ button {
     -moz-box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
 }
-
 
 /* ESTILOS DE BUSQUEDA */
 
