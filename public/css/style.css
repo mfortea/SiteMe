@@ -33,11 +33,11 @@ nav {
         -webkit-backdrop-filter: saturate(180%) blur(40px);
         backdrop-filter: saturate(180%) blur(40px);
     }
-    .modal__overlay{
+    .modal__overlay {
         -webkit-backdrop-filter: saturate(100%) blur(15px);
         backdrop-filter: saturate(100%) blur(15px);
     }
-    .modal__container{
+    .modal__container {
         -webkit-box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
         -moz-box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
         box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
@@ -115,6 +115,50 @@ button {
     }
 }
 
+/* Estilos para la scrollbar */
+
+::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+}
+
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4d7662;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #75b797;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #2d4339;
+}
+
+::-webkit-scrollbar-track {
+    background: #a4a4a4;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-track:hover {
+    background: #a4a4a4;
+}
+
+::-webkit-scrollbar-track:active {
+    background: #656565;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
 /* ESTILOS DE INICIO */
 
 .banner-principal {
@@ -129,15 +173,11 @@ button {
     font-size: 40px;
 }
 
-
 @media screen and (max-width: 640px) {
     .banner-principal h2 {
         font-size: 30px;
     }
 }
-
-
-
 
 @keyframes animacionBanner {
     0% {
