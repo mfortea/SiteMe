@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsuarioRepository")
@@ -34,9 +36,15 @@ class Usuario implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Favorito", mappedBy="usuario", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Favorito", inversedBy="usuarios")
      */
     private $favoritos;
+
+    public function __construct()
+    {
+        $this->favoritos = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -128,7 +136,7 @@ class Usuario implements UserInterface
     {
         if (!$this->favoritos->contains($favorito)) {
             $this->favoritos[] = $favorito;
-            $favorito->setUsuario($this);
+            $favorito->addUsuario($this);
         }
 
         return $this;

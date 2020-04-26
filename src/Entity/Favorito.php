@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FavoritoRepository")
@@ -17,9 +19,9 @@ class Favorito
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
-    private $id_sitio;
+    private $idSitio;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -47,10 +49,15 @@ class Favorito
     private $direccion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Usuario", inversedBy="favoritos")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity="App\Entity\Usuario", mappedBy="favoritos")
      */
-    private $usuario;
+    private $usuarios;
+
+    public function __construct()
+    {
+        $this->usuarios = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -59,12 +66,12 @@ class Favorito
 
     public function getIdSitio(): ?string
     {
-        return $this->id_sitio;
+        return $this->idSitio;
     }
 
-    public function setIdSitio(string $id_sitio): self
+    public function setIdSitio(string $idSitio): self
     {
-        $this->id_sitio = $id_sitio;
+        $this->idSitio = $idSitio;
 
         return $this;
     }
@@ -129,14 +136,31 @@ class Favorito
         return $this;
     }
 
-    public function getUsuario(): ?Usuario
+    /**
+     * @return Collection|Usuario[]
+     */
+    public function getUsuarios(): Collection
     {
-        return $this->usuario;
+        return $this->usuarios;
     }
 
-    public function setUsuario(?Usuario $usuario): self
+    public function addUsuario(Usuario $usuario): self
     {
-        $this->usuario = $usuario;
+        if (!$this->usuarios->contains($usuario)) {
+            $this->usuarios[] = $usuario;
+            $usuario->addFavorito($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsuario(Usuario $usuario): self
+    {
+        if ($this->usuarios->contains($usuario)) {
+            $this->usuarios->removeElement($usuario);
+            $usuario->removeFavorito($this);
+        }
+
         return $this;
     }
 }

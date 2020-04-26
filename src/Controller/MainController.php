@@ -41,10 +41,12 @@ class MainController extends AbstractController {
 
     public function nuevoFavorito ( Request $request ) {
 
+        $usuario = $this->get('security.token_storage')->getToken()->getUser();
+        
         $json_raw = $request->getContent();
         $json = json_decode($json_raw);
 
-        $id_sitio = $json->id;
+        $idSitio = $json->id;
         $nombre = $json->nombre;
         $latitud = $json->latitud;
         $longitud = $json->longitud;
@@ -52,36 +54,48 @@ class MainController extends AbstractController {
         $direccion =  $json->direccion;
 
         $entityManager = $this->getDoctrine()->getManager();
+
         $favorito = new Favorito();
-        $usuario = $this->get('security.token_storage')->getToken()->getUser();
-        $favoritos = $entityManager->getRepository(Favorito::class)->findByUsuario($usuario);
-
-        foreach($favoritos as $sitio) {
-            if($sitio->getIdSitio() == $id_sitio ) {
-                return new JsonResponse([
-                    'error' => 'El sitio ya está en tus favoritos'
-                    ], 409);
-            }
-        }
-
-        $favorito->setUsuario($usuario);
-        $favorito->setIdSitio($id_sitio);
+        $favorito->setIdSitio($idSitio);
         $favorito->setNombre($nombre);
         $favorito->setLatitud($latitud);
         $favorito->setLongitud($longitud);
         $favorito->setIcono($icono);
         $favorito->setDireccion($direccion);
 
-        $entityManager->persist($favorito);
-        $entityManager->flush();
+        $favoritoBD = $entityManager->getRepository(Favorito::class)->findOneByIdSitio($idSitio);
 
-        return new JsonResponse(200);
+        if (!$favorito == $favoritoBD){
+            $favorito->addUsuario($usuario);
+            $entityManager->persist($favorito);
+            $entityManager->flush();
+            return new JsonResponse(200);
+
+        } else {
+
+            $usuarios = $favoritoBD->getUsuarios();
+
+            foreach($usuarios as $usuarioBD) {
+                if($usuarioBD == $usuario ) {
+                    return new JsonResponse([
+                        'error' => 'El sitio ya está en tus favoritos'
+                        ], 409);
+                }
+            }
+
+            $favoritoBD->addUsuario($usuario);
+            $entityManager->persist($favoritoBD);
+            $entityManager->flush();
+            return new JsonResponse(200);
+        }
+
+
     }
 
     public function obtenerFavoritos(){
         $entityManager = $this->getDoctrine()->getManager();
         $usuario = $this->get('security.token_storage')->getToken()->getUser();
-        $favoritos = $entityManager->getRepository(Favorito::class)->findByUsuario($usuario);
+        $favoritos = $usuario->getFavoritos();
 
         $respuesta = new stdClass();
         $numSitios = count( $favoritos );
@@ -112,22 +126,22 @@ class MainController extends AbstractController {
     }
 
 
-    public function eliminarFavorito(Request $request, $id_sitio) {
+    public function eliminarFavorito(Request $request, $idSitio) {
         $entityManager = $this->getDoctrine()->getManager();
         $usuario = $this->get('security.token_storage')->getToken()->getUser();
-        $favoritos = $entityManager->getRepository(Favorito::class)->findByUsuario($usuario);
+        $favoritos = $usuario->getFavoritos();
 
         foreach($favoritos as $favorito) {
-          if($favorito->getIdSitio() == $id_sitio ) {
+          if($favorito->getIdSitio() == $idSitio ) {
             $entityManager->remove($favorito);
             $entityManager->flush();
             return new JsonResponse(null, 204);
-          } else {
-            return new JsonResponse([
-                'error' => 'El id del sitio no existe'
-                ], 404);
           }
         }
+
+        return new JsonResponse([
+            'error' => 'El id del sitio no existe'
+            ], 404);
 
     }
 
