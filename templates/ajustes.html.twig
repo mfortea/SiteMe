@@ -1,19 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block titulo %}{{ parent() }} - Búsqueda{% endblock %}
+{% block titulo %}{{ parent() }} - Ajustes de {{ app.user.username }}{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{ asset('css/micromodal.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('css/all.min.css') }}" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/Control.FullScreen.css') }}" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
 {% endblock %}
 
 {% block body %}
  <noscript>
         <h2>El uso de Javascript es necesario</h2>
     </noscript>
-    <body onload="obtenerCoordenadas('busqueda')">
+    <body>
         <nav id="menu" class="navbar navbar-expand-md navbar-light fixed-top text-center">
             <a class="navbar-brand" href="{{ path('busqueda') }}"><img alt="Logo de SiteMe" class="p-3" src="imagenes/logo_letras.png" width="200px" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,15 +18,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active m-2">
-                        <a class="nav-link" href="{{ path('busqueda') }}"><i class="fas fa-search"></i> &nbsp; Búsqueda <span class="sr-only">(current)</span></a>
+                    <li class="nav-item m-2">
+                        <a class="nav-link" href="{{ path('busqueda') }}"><i class="fas fa-search"></i> &nbsp; Búsqueda </a>
                     </li>
                     <li class="nav-item m-2">
-                        <a class="nav-link" href="{{ path('sitios') }}"><i class="fas fa-compass"></i> &nbsp; Mis sitios</a>
+                        <a class="nav-link" href="{{ path('sitios') }}"><i class="fas fa-compass"></i> &nbsp; Mis sitios <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item m-2">
                         <div class="dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> &nbsp; Mi perfil</a>
+                            <a class="nav-link active dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> &nbsp; Mi perfil</a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item disabled" href="#">{{ app.user.username }}</a>
                                 <a class="dropdown-item" href="{{ path('ajustes') }}"><i class="fas fa-cog"></i> &nbsp; Ajustes de perfil</a>
@@ -43,24 +40,7 @@
 
         <div class="separador"></div>
         <div class="container-fluid mt-5 text-center">
-            <h1>¿Qué sitios buscas?</h1>
-            <br>
-            <form action="javascript:buscar()">
-            <div class="row">
-                <div class="col-sm-12">
-                    <input id="input-busqueda" name="input-busqueda" disabled class="input-busqueda mb-3 text-center" placeholder="Por ejemplo: Restaurantes" type="text" required />
-                </div>
-
-                <div class="col-sm-12">
-                    <button disabled id="boton-buscar" class="boton" type="submit">Buscar</button>
-                </div>
-                <br>
-            </div>
-            </form>
-            <br><br>
-            <div id="map">
-                <h3 id="cargando" class="cargando text-center mt-5"><i class="fas fa-hourglass-half"></i> &nbsp; Cargando mapa...</h3>
-            </div>
+            <h1>Ajustes de {{ app.user.username }}</h1>
         </div>
     </body>
 
@@ -80,18 +60,13 @@
 
     <!-- PIE DE LA PÁGINA -->
     <footer class="text-center">
-        <p class="mt-5 mb-3 text-muted">&copy; SiteMe {{ "now"|date("Y") }} - <span id="estado">Ubicación desactivada</span>
+        <p class="mt-5 mb-3 text-muted">&copy; SiteMe {{ "now"|date("Y") }}</p>
     </footer>
 
 
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('js/utiles.js') }}"></script>
-    <script src="{{ asset('js/busqueda.js') }}"></script>
     <script src="{{ asset('js/efectosInterfaz.js') }}"></script>
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
-    <script src="{{ asset('js/Control.FullScreen.js') }}"></script>
-    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 {% endblock %}

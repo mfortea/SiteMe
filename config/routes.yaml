@@ -10,6 +10,10 @@ sitios:
     path: /sitios
     controller: App\Controller\MainController::sitios
 
+ajustes:
+    path: /ajustes
+    controller: App\Controller\MainController::ajustes
+
 buscarLugares:
     path: /buscarLugares
     controller: App\Controller\MainController::buscarLugares

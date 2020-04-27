@@ -23,6 +23,14 @@ class MainController extends AbstractController {
         return $this->render( 'busqueda.html.twig' );
     }
 
+    public function sitios() {
+        return $this->render( 'sitios.html.twig' );
+    }
+
+    public function ajustes() {
+        return $this->render( 'ajustes.html.twig' );
+    }
+
     public function buscarLugares( LoggerInterface $logger, Request $request, SitiosService $sitiosService ) {
 
         $json_raw = $request->getContent();
@@ -143,10 +151,6 @@ class MainController extends AbstractController {
             'error' => 'El id del sitio no existe'
             ], 404);
 
-    }
-
-    public function sitios() {
-        return $this->render( 'sitios.html.twig' );
     }
 
 }

@@ -24,6 +24,8 @@ security:
 
     access_control:
         - { path: ^/busqueda, roles: "ROLE_USER" }
+        - { path: ^/sitios, roles: "ROLE_USER" }
+        - { path: ^/ajustes, roles: "ROLE_USER" }
         - { path: ^/buscarLugares, roles: "ROLE_USER" }
         - { path: ^/nuevoFavorito, roles: "ROLE_USER" }
         - { path: ^/obtenerFavoritos, roles: "ROLE_USER" }
