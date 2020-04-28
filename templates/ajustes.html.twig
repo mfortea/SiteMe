@@ -39,22 +39,65 @@
         <div class="separador"></div>
         <div class="container-fluid mt-5 text-center">
             <h1>Ajustes</h1>
+            <div id="ajustes">
+                <h2>{{ app.user.username }}</h2>
+                <br>
+                <button type="button" class="mb-2 btn-ajustes btn btn-lg btn-web"><i class="fas fa-lock"></i> &nbsp; Cambiar contraseña</button><br>
+                <button type="button" onclick="window.location.href = '{{ path('app_logout') }}'" class="mb-2 btn-ajustes btn btn-lg btn-web"><i class="fas fa-sign-out-alt"></i> &nbsp; Cerrar sesión</button><br>
+                <button type="button" onclick="mostrarModal('modal-borrarsitios');" class="mb-2 btn-ajustes btn btn-lg btn-danger"><i class="fas fa-trash-alt"></i> &nbsp; Borrar todos los sitios</button><br>
+                <button type="button" onclick="mostrarModal('modal-borrarcuenta');" class="mb-2 btn-ajustes btn btn-lg btn-outline-danger"><i class="fas fa-user-minus"></i> &nbsp; Eliminar cuenta</button>
+            </div>
         </div>
     </body>
 
-    <!-- Ventana modal para errores-->
-    <div class="modal micromodal-slide" id="modal" aria-hidden="true">
-        <div class="modal__overlay" tabindex="-1">
-            <div class="modal__container text-center" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-                <main class="modal__content" id="modal-1-content">
-                    <i id="simboloModal"></i>
-                    <br><br>
-                    <h3 id="cuerpoModal"></h3>
-                </main>
-                <button class="boton" data-micromodal-close aria-label="Cerrar"><i class="fas fa-times-circle"></i> &nbsp; Cerrar</button>
+    <!-- Ventanas modales-->
+
+        <!-- Modal borrar favoritos-->
+        <div class="modal micromodal-slide" id="modal-borrarsitios" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1">
+                <div class="modal__container text-center" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                    <main class="modal__content" id="modal-1-content">
+                        <i class="fas fa-exclamation-triangle fa-3x"></i>
+                        <br><br>
+                        <h3>¿Estás seguro de que quieres eliminar TODOS tus sitios favoritos?</h3>
+                        <h4>Esta acción no podrá deshacerse</h4>
+                    </main>
+                    <button class="boton" onclick="cerrarModal('modal-borrarsitios');"><i class="fas fa-times-circle"></i> &nbsp; Cerrar</button>
+                    <button type="button" class="mt-2 btn-ajustes btn btn-lg btn-danger"><i class="fas fa-trash-alt"></i> &nbsp; Eliminar favoritos</button><br>
+                </div>
             </div>
         </div>
-    </div>
+
+        <!-- Modal eliminar cuenta-->
+        <div class="modal micromodal-slide" id="modal-borrarcuenta" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1">
+                <div class="modal__container text-center" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                    <main class="modal__content" id="modal-1-content">
+                        <i class="fas fa-exclamation-triangle fa-3x"></i>
+                        <br><br>
+                        <h3>¿Estás seguro de que quieres eliminar tu cuenta de SiteMe?</h3>
+                    </main>
+                    <button class="boton" onclick="cerrarModal('modal-borrarcuenta');"><i class="fas fa-times-circle"></i> &nbsp; Cerrar</button>
+                    <button type="button" onclick="cerrarModal('modal-borrarcuenta'); mostrarModal('modal-borrarcuenta-conf');" class="mt-2 btn-ajustes btn btn-lg btn-danger"><i class="fas fa-user-minus"></i> &nbsp; Eliminar cuenta</button><br>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal eliminar cuenta confirmacion-->
+        <div class="modal micromodal-slide" id="modal-borrarcuenta-conf" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1">
+                <div class="modal__container text-center" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                    <main class="modal__content rojo" id="modal-1-content">
+                        <i class="fas fa-exclamation-triangle fa-3x"></i>
+                        <br><br>
+                        <h3>¿Estás seguro?</h3>
+                        <h4>Esta acción no podrá deshacerse</h4>
+                    </main>
+                    <button class="boton" onclick="cerrarModal('modal-borrarcuenta-conf');" ><i class="fas fa-times-circle"></i> &nbsp; Cerrar</button>
+                    <button type="button" class="mt-2 btn-ajustes btn btn-lg btn-danger"><i class="fas fa-user-minus"></i> &nbsp; Eliminar cuenta definitivamente</button><br>
+                </div>
+            </div>
+        </div>
 
     <!-- PIE DE LA PÁGINA -->
     <footer class="text-center">
@@ -65,6 +108,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('js/ajustes.js') }}"></script>
     <script src="{{ asset('js/efectosInterfaz.js') }}"></script>
     <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
 {% endblock %}

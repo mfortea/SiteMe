@@ -486,3 +486,53 @@ button {
 .leaflet-popup-close-button:hover {
     font-weight: bold !important;
 }
+
+/* ESTILOS DE AJUSTES */
+.btn-web {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    width: 300px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #4d7662 !important;
+    color: white !important;
+    font-size: 20px;
+    transition: 0.5s;
+}
+
+.btn-web:hover {
+    background-color: #75b797 !important;
+    transition: 0.5s;
+    -webkit-box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
+}
+
+#ajustes h2{
+    text-align: center;
+    color: rgb(148, 148, 148);
+}
+
+.btn-ajustes {
+    width: 300px;
+}
+
+.rojo {
+    color: rgb(134, 1, 1) !important;
+}
+
+@media screen and (max-width: 500px) {
+    .btn-ajustes {
+        width: 100%;
+    }
+
+    #ajustes h2{
+        font-size: 20px;
+        color: rgb(148, 148, 148);
+    }
+    
+}
