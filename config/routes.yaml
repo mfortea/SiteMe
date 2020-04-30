@@ -33,3 +33,8 @@ eliminarFavorito:
     path: /eliminarFavorito/{idSitio}
     controller: App\Controller\MainController::eliminarFavorito
     methods: ["DELETE"]
+
+eliminarFavoritos:
+    path: /eliminarFavoritos
+    controller: App\Controller\MainController::eliminarFavoritos
+    methods: ["DELETE"]

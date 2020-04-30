@@ -134,7 +134,7 @@ class MainController extends AbstractController {
     }
 
 
-    public function eliminarFavorito(Request $request, $idSitio) {
+    public function eliminarFavorito($idSitio) {
         $entityManager = $this->getDoctrine()->getManager();
         $usuario = $this->get('security.token_storage')->getToken()->getUser();
         $favoritos = $usuario->getFavoritos();
@@ -152,5 +152,18 @@ class MainController extends AbstractController {
             ], 404);
 
     }
+
+    public function eliminarFavoritos(){
+        $entityManager = $this->getDoctrine()->getManager();
+        $usuario = $this->get('security.token_storage')->getToken()->getUser();
+        $favoritos = $usuario->getFavoritos();
+
+        foreach($favoritos as $favorito) {
+              $entityManager->remove($favorito);
+        }
+        $entityManager->flush();
+        return new JsonResponse(null, 204);
+    }
+
 
 }
