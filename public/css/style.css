@@ -32,7 +32,8 @@ nav {
     .navbar-brand {
         float: right;
     }
-    .navbar-brand, .navbar-nav .nav-item {
+    .navbar-brand,
+    .navbar-nav .nav-item {
         display: block;
     }
     .navbar-nav .nav-item+.nav-item {
@@ -48,7 +49,7 @@ nav {
     .dropdown-item {
         padding: 0.25rem 0.5rem !important;
     }
-    .dropdown-item.disabled{
+    .dropdown-item.disabled {
         display: none !important;
     }
 }
@@ -63,9 +64,11 @@ nav {
     box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
 }
 
-.dropdown-item.active, .dropdown-item:active {
+.dropdown-item.active,
+.dropdown-item:active {
     background-color: #4d7662 !important;
 }
+
 
 /* Para navegadores que soporten el efecto blur */
 
@@ -121,7 +124,8 @@ button {
     width: 300px;
 }
 
-.input-busqueda:disabled, .input-busqueda[disabled] {
+.input-busqueda:disabled,
+.input-busqueda[disabled] {
     cursor: default;
     background-color: #cccccc;
     color: #666666;
@@ -156,6 +160,7 @@ button {
         color: black;
     }
 }
+
 
 /* Estilos para la scrollbar */
 
@@ -200,6 +205,7 @@ button {
 ::-webkit-scrollbar-corner {
     background: transparent;
 }
+
 
 /* ESTILOS DE INICIO */
 
@@ -251,7 +257,8 @@ button {
     transition: 0.5s;
 }
 
-.boton:disabled, .boton[disabled] {
+.boton:disabled,
+.boton[disabled] {
     cursor: default;
     background-color: #cccccc;
     color: #666666;
@@ -305,6 +312,7 @@ button {
     }
 }
 
+
 /* ESTILOS DEL LOGIN */
 
 .body-login {
@@ -326,6 +334,10 @@ button {
 
 .form-login .checkbox {
     font-weight: 400;
+}
+
+.form-login label {
+    display: none;
 }
 
 .form-login .form-control {
@@ -375,6 +387,7 @@ button {
     -moz-box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
 }
+
 
 /* ESTILOS DE BUSQUEDA */
 
@@ -487,7 +500,9 @@ button {
     font-weight: bold !important;
 }
 
+
 /* ESTILOS DE AJUSTES */
+
 .btn-web {
     font-family: inherit;
     font-size: inherit;
@@ -512,7 +527,7 @@ button {
     box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
 }
 
-#ajustes h2{
+#ajustes h2 {
     text-align: center;
     color: rgb(148, 148, 148);
 }
@@ -529,10 +544,39 @@ button {
     .btn-ajustes {
         width: 100%;
     }
-
-    #ajustes h2{
+    #ajustes h2 {
         font-size: 20px;
         color: rgb(148, 148, 148);
     }
-    
+}
+
+
+/* ESTILOS DE CAMBIAR CONTRASEÑA */
+
+#cambiar_clave_save {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    width: 300px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #4d7662;
+    color: white;
+    font-size: 20px;
+    transition: 0.5s;
+}
+
+#cambiar_clave_save:hover {
+    background-color: #75b797;
+    transition: 0.5s;
+    -webkit-box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
+}
+
+#error {
+    display: none;
 }

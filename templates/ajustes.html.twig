@@ -42,7 +42,7 @@
             <div id="ajustes">
                 <h2>{{ app.user.username }}</h2>
                 <br>
-                <button type="button" class="mb-2 btn-ajustes btn btn-lg btn-web"><i class="fas fa-lock"></i> &nbsp; Cambiar contraseña</button><br>
+                <button type="button" onclick="window.location.href = '{{ path('cambiarClave') }}'"  class="mb-2 btn-ajustes btn btn-lg btn-web"><i class="fas fa-lock"></i> &nbsp; Cambiar contraseña</button><br>
                 <button type="button" onclick="window.location.href = '{{ path('app_logout') }}'" class="mb-2 btn-ajustes btn btn-lg btn-web"><i class="fas fa-sign-out-alt"></i> &nbsp; Cerrar sesión</button><br>
                 <button type="button" onclick="mostrarModal('modal-borrarsitios');" class="mb-2 btn-ajustes btn btn-lg btn-danger"><i class="fas fa-trash-alt"></i> &nbsp; Borrar todos los sitios</button><br>
                 <button type="button" onclick="mostrarModal('modal-borrarcuenta');" class="mb-2 btn-ajustes btn btn-lg btn-outline-danger"><i class="fas fa-user-minus"></i> &nbsp; Eliminar cuenta</button>
@@ -50,9 +50,23 @@
         </div>
     </body>
 
-    <!-- Ventanas modales-->
+    <!-- Ventanas modales -->
 
-        <!-- Modal borrar favoritos-->
+        <!-- Modal estándar -->
+        <div class="modal micromodal-slide" id="modal-estandar" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1">
+                <div class="modal__container text-center" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                    <main class="modal__content" id="modal-1-content">
+                        <i id="simboloModal"></i>
+                        <br><br>
+                        <h3 id="cuerpoModal"></h3>
+                    </main>
+                    <button class="boton btn-ajustes" onclick="cerrarModal('modal-estandar');"><i class="fas fa-times-circle"></i> &nbsp; Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal borrar favoritos -->
         <div class="modal micromodal-slide" id="modal-borrarsitios" aria-hidden="true">
             <div class="modal__overlay" tabindex="-1">
                 <div class="modal__container text-center" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
@@ -68,7 +82,7 @@
             </div>
         </div>
 
-        <!-- Modal eliminar cuenta-->
+        <!-- Modal eliminar cuenta -->
         <div class="modal micromodal-slide" id="modal-borrarcuenta" aria-hidden="true">
             <div class="modal__overlay" tabindex="-1">
                 <div class="modal__container text-center" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
@@ -83,7 +97,7 @@
             </div>
         </div>
 
-        <!-- Modal eliminar cuenta confirmacion-->
+        <!-- Modal eliminar cuenta confirmacion -->
         <div class="modal micromodal-slide" id="modal-borrarcuenta-conf" aria-hidden="true">
             <div class="modal__overlay" tabindex="-1">
                 <div class="modal__container text-center" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
@@ -98,21 +112,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Modal favoritos eliminados -->
-        <div class="modal micromodal-slide" id="modal-fav-eliminados" aria-hidden="true">
-            <div class="modal__overlay" tabindex="-1">
-                <div class="modal__container text-center" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-                    <main class="modal__content" id="modal-1-content">
-                        <i class="fas fa-check-circle fa-3x"></i>
-                        <br><br>
-                        <h3>Se han eliminado tus sitios favoritos correctamente</h3>
-                    </main>
-                    <button class="boton btn-ajustes" onclick="window.location.href = '{{ path('busqueda') }}'" ><i class="fas fa-times-circle"></i> &nbsp; Cerrar</button>
-                </div>
-            </div>
-        </div>
-
 
         <!-- Modal error desconocido -->
         <div class="modal micromodal-slide" id="modal-error" aria-hidden="true">

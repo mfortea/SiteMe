@@ -1,0 +1,8 @@
+{# form_errors.html.twig #}
+{% block form_errors %}
+        {% if errors|length > 0 %}
+            {% for error in errors %}
+                <div class="alert alert-danger" role="alert">{{ error.message }}</div> 
+            {% endfor %}
+        {% endif %}
+{% endblock form_errors %}

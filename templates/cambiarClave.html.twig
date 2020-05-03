@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'form_errors.html.twig' %}
+{% block titulo %}{{ parent() }} - Cambiar contraseña{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/micromodal.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/all.min.css') }}" />
+{% endblock %}
+{% block body %}
+<body class="text-center body-login">
+
+    <div class="form-login">
+        <img class="mb-4" src="imagenes/logo_letras.png" alt="Logo de SiteMe" height="72" />
+        <h1 class="h3 mb-3 ">Cambiar contraseña</h1>
+
+    {{ form_start(form) }}
+    
+        {{ form_label(form.claveAnterior) }}
+        {{ form_widget(form.claveAnterior) }}
+        {{ form_errors(form.claveAnterior) }}
+
+        {{ form_label(form.clave.first) }}
+        {{ form_widget(form.clave.first) }}
+
+        {{ form_label(form.clave.second) }}
+        {{ form_widget(form.clave.second) }}
+        {{ form_errors(form.clave.first) }}
+
+        {{ form_row(form.save) }}
+
+    {{ form_end(form) }}
+
+        
+
+        <p class="mt-5 mb-3 text-muted">&copy; SiteMe - {{ "now"|date("Y") }}</p>
+    </div>
+</body>
+    <!-- Ventana modal -->
+    <div class="modal micromodal-slide" id="modal-estandar" aria-hidden="true">
+        <div class="modal__overlay" tabindex="-1">
+            <div class="modal__container text-center" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                <main class="modal__content" id="modal-1-content">
+                    <i id="simboloModal"></i>
+                    <br><br>
+                    <h3 id="cuerpoModal"></h3>
+                </main>
+                <button class="boton btn-ajustes" onclick="cerrarModal('modal-estandar');"><i class="fas fa-times-circle"></i> &nbsp; Cerrar</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('js/cambiarClave.js') }}"></script>
+    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+{% endblock %}

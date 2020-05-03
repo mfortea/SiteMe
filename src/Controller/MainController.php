@@ -5,15 +5,25 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Psr\Log\LoggerInterface;
 use App\Service\SitiosService;
 use App\API\GMapsApiSitios;
 use App\API\MockApiSitios;
 use App\Entity\Usuario;
 use App\Entity\Favorito;
+use App\Form\Model\CambiarClave;
+use App\Form\CambiarClaveType;
 use \stdClass;
 
 class MainController extends AbstractController {
+
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder){
+        $this->passwordEncoder = $passwordEncoder;
+    }
 
     public function index() {
         return $this->render( 'index.html.twig' );
@@ -163,6 +173,36 @@ class MainController extends AbstractController {
         }
         $entityManager->flush();
         return new JsonResponse(null, 204);
+    }
+
+    public function cambiarClave(Request $request) {
+        $session = $request->getSession();
+        $modeloCambiarClave = new CambiarClave();
+        $form = $this->createForm(CambiarClaveType::class, $modeloCambiarClave);
+    
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted()) {
+    
+            if ($form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $usuario = $this->getUser();
+                $encoder = $this->passwordEncoder;
+                $password = $encoder->encodePassword($usuario, $modeloCambiarClave->getClave());
+                $usuario->setPassword($password);
+                $entityManager->persist($usuario);
+                $flush = $entityManager->flush();
+                if ($flush === null) {
+                    return $this->render('claveCambiada.html.twig');
+                } else {
+                    $session->getFlashBag()->add('warning', 'No se ha podido cambiar la contraseña');
+                }
+            }
+        }
+    
+        return $this->render('cambiarClave.html.twig', array(
+                    'form' => $form->createView(),
+        ));
     }
 
 
