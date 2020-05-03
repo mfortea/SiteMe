@@ -24,7 +24,7 @@ public function buildForm(FormBuilderInterface $builder, array $options)
                     )
             )
             ->add('save', SubmitType::class,
-            array('label' => 'Cambiar contraseña')) 
+            array('label' => 'Cambiar contraseña', "attr" => array("class" => "boton-login")))
             ;
 }
 

@@ -42,3 +42,7 @@ eliminarFavoritos:
     path: /eliminarFavoritos
     controller: App\Controller\MainController::eliminarFavoritos
     methods: ["DELETE"]
+
+eliminarUsuario:
+    path: /eliminarUsuario
+    controller: App\Controller\MainController::eliminarUsuario

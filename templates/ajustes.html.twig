@@ -86,29 +86,13 @@
         <div class="modal micromodal-slide" id="modal-borrarcuenta" aria-hidden="true">
             <div class="modal__overlay" tabindex="-1">
                 <div class="modal__container text-center" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-                    <main class="modal__content" id="modal-1-content">
+                    <main class="modal__content rojo" id="modal-1-content">
                         <i class="fas fa-exclamation-triangle fa-3x"></i>
                         <br><br>
                         <h3>¿Estás seguro de que quieres eliminar tu cuenta de SiteMe?</h3>
                     </main>
-                    <button class="boton btn-ajustes" onclick="cerrarModal('modal-borrarcuenta');"><i class="fas fa-times-circle"></i> &nbsp; Cerrar</button>
-                    <button type="button" onclick="cerrarModal('modal-borrarcuenta'); mostrarModal('modal-borrarcuenta-conf');" class="mt-2 btn-ajustes btn btn-lg btn-danger"><i class="fas fa-user-minus"></i> &nbsp; Eliminar cuenta</button><br>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal eliminar cuenta confirmacion -->
-        <div class="modal micromodal-slide" id="modal-borrarcuenta-conf" aria-hidden="true">
-            <div class="modal__overlay" tabindex="-1">
-                <div class="modal__container text-center" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-                    <main class="modal__content rojo" id="modal-1-content">
-                        <i class="fas fa-exclamation-triangle fa-3x"></i>
-                        <br><br>
-                        <h3>¿Estás seguro?</h3>
-                        <h4>Esta acción no podrá deshacerse</h4>
-                    </main>
-                    <button class="boton btn-ajustes" onclick="cerrarModal('modal-borrarcuenta-conf');" ><i class="fas fa-times-circle"></i> &nbsp; Cerrar</button>
-                    <button type="button" class="mt-2 btn-ajustes btn btn-lg btn-danger"><i class="fas fa-user-minus"></i> &nbsp; Eliminar cuenta definitivamente</button><br>
+                    <button class="boton btn-ajustes" onclick="cerrarModal('modal-borrarcuenta');" ><i class="fas fa-times-circle"></i> &nbsp; Cerrar</button>
+                    <button type="button" onclick="window.location.href = '{{ path('eliminarUsuario') }}'" class="mt-2 btn-ajustes btn btn-lg btn-danger"><i class="fas fa-user-minus"></i> &nbsp; Eliminar cuenta</button><br>
                 </div>
             </div>
         </div>

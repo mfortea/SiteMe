@@ -31,3 +31,4 @@ security:
         - { path: ^/obtenerFavoritos, roles: "ROLE_USER" }
         - { path: ^/eliminarFavoritos, roles: "ROLE_USER" }
         - { path: ^/cambiarClave, roles: "ROLE_USER" }
+        - { path: ^/eliminarUsuario, roles: "ROLE_USER" }

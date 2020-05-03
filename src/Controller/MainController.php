@@ -15,6 +15,8 @@ use App\Entity\Usuario;
 use App\Entity\Favorito;
 use App\Form\Model\CambiarClave;
 use App\Form\CambiarClaveType;
+use App\Form\Model\EliminarUsuario;
+use App\Form\EliminarUsuarioType;
 use \stdClass;
 
 class MainController extends AbstractController {
@@ -204,6 +206,37 @@ class MainController extends AbstractController {
                     'form' => $form->createView(),
         ));
     }
+
+
+public function eliminarUsuario(Request $request) {
+    $session = $request->getSession();
+    $modeloEliminarUsuario = new EliminarUsuario();
+    $form = $this->createForm(EliminarUsuarioType::class, $modeloEliminarUsuario);
+
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted()) {
+
+        if ($form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $usuario = $this->get('security.token_storage')->getToken()->getUser();
+            $encoder = $this->passwordEncoder;
+            $password = $encoder->encodePassword($usuario, $modeloEliminarUsuario->getClave());
+            $this->get('security.token_storage')->setToken(null);
+            $entityManager->remove($usuario);
+            $flush = $entityManager->flush();
+            if ($flush === null) {
+                return $this->render('usuarioEliminado.html.twig');
+            } else {
+                $session->getFlashBag()->add('warning', 'No se ha podido eliminar el usuario');
+            }
+        }
+    }
+
+    return $this->render('eliminarUsuario.html.twig', array(
+                'form' => $form->createView(),
+    ));
+}
 
 
 }

@@ -549,34 +549,3 @@ button {
         color: rgb(148, 148, 148);
     }
 }
-
-
-/* ESTILOS DE CAMBIAR CONTRASEÑA */
-
-#cambiar_clave_save {
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    cursor: pointer;
-    width: 300px;
-    padding: 10px;
-    border-radius: 8px;
-    background-color: #4d7662;
-    color: white;
-    font-size: 20px;
-    transition: 0.5s;
-}
-
-#cambiar_clave_save:hover {
-    background-color: #75b797;
-    transition: 0.5s;
-    -webkit-box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
-}
-
-#error {
-    display: none;
-}

@@ -10,7 +10,8 @@
         <br><br>
         <i class="fas fa-check-circle fa-5x"></i>
         <br><br>
-        <h2>Se ha cambiado la contraseña correctamente</h2>
+        <h2>Se ha eliminado su cuenta de SiteMe correctamente</h2>
+        <h3>¡Esperamos volver a verte!</h3>
         <br>
         <h4>Redirigiendo ... <h4>
         <br>
@@ -18,7 +19,7 @@
         <script>
         function redireccionar(){
             setTimeout( function() { 
-                window.location.href = "{{ path('app_logout') }}"; }, 5000 );
+                window.location.href = "{{ path('index') }}"; }, 5000 );
             }
         </script>
     </body>
