@@ -53,7 +53,7 @@ function buscar() {
                         '<p class="tituloPopup">' + json_cache.sitios[i].nombre + '</p>' +
                         '<p class="detallePopup">' + json_cache.sitios[i].direccion + '</p>' +
                         '<p class="distanciaPopup"><i class="fas fa-directions"></i> A ' + medirDistancia(lat, lng, json_cache.sitios[i].latitud, json_cache.sitios[i].longitud) + ' kilómetros</p>' +
-                        '<button title="Añadir a favoritos" class="botonFavorito" onclick="nuevoFavorito(\'' + i + '\')"><i class="fas fa-2x fa-star"></i></button>' +
+                        '<button title="Añadir a favoritos" class="botonFavorito" onclick="nuevoFavorito(\'' + i + '\')"><i class="far fa-2x fa-star"></i></button>' +
                         // '<button class="botonRuta" onclick="calcularRuta(\'' + json_cache.sitios[i].latitud + '\', \'' + json_cache.sitios[i].longitud + '\')"><i class="fas fa-2x fa-directions"></i></button>' +
                         '</center>'
 
@@ -99,7 +99,7 @@ function comprobarFavoritos() {
                                     '<p class="detallePopup">' + favoritos.sitios[j].direccion + '</p>' +
                                     '<p class="distanciaPopup"><i class="fas fa-directions"></i> A ' + medirDistancia(lat, lng, favoritos.sitios[j].latitud, favoritos.sitios[j].longitud) + ' kilómetros</p>' +
                                     '<p class="favPopup"><i class="fa fa-star"></i>&nbsp; Está en tus favoritos</p>' +
-                                    '<button title="Quitar de favoritos" class="botonFavorito" onclick="eliminarFavorito(\'' + favoritos.sitios[j].id + '\',\'busqueda\')"><i class="far fa-2x fa-star"></i></button>' +
+                                    '<button title="Quitar de favoritos" class="botonFavorito" onclick="eliminarFavorito(\'' + favoritos.sitios[j].id + '\',\'busqueda\')"><i class="fas fa-2x fa-star"></i></button>' +
                                     '</center>'
                                 )
                                 .addTo(map);
@@ -139,7 +139,7 @@ function ultimaBusqueda() {
                 '<p class="tituloPopup">' + json_cache.sitios[i].nombre + '</p>' +
                 '<p class="detallePopup">' + json_cache.sitios[i].direccion + '</p>' +
                 '<p class="distanciaPopup"><i class="fas fa-directions"></i> A ' + medirDistancia(lat, lng, json_cache.sitios[i].latitud, json_cache.sitios[i].longitud) + ' kilómetros</p>' +
-                '<button class="botonFavorito" onclick="nuevoFavorito(\'' + i + '\')"><i class="fas fa-2x fa-star"></i></button>' +
+                '<button class="botonFavorito" onclick="nuevoFavorito(\'' + i + '\')"><i class="far fa-2x fa-star"></i></button>' +
                 // '<button class="botonRuta" onclick="calcularRuta(\'' + json_cache.sitios[i].latitud + '\', \'' + json_cache.sitios[i].longitud + '\')"><i class="fas fa-2x fa-directions"></i></button>' +
                 '</center>'
 

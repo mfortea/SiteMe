@@ -33,7 +33,7 @@ function obtenerFavoritos() {
                         '<p class="tituloPopup">' + resultados.sitios[i].nombre + '</p>' +
                         '<p class="detallePopup">' + resultados.sitios[i].direccion + '</p>' +
                         '<p class="distanciaPopup"><i class="fas fa-directions"></i> A ' + medirDistancia(lat, lng, resultados.sitios[i].latitud, resultados.sitios[i].longitud) + ' kilómetros</p>' +
-                        '<button title="Quitar de favoritos" class="botonFavorito" onclick="eliminarFavorito(\'' + resultados.sitios[i].id + '\',\'sitios\')"><i class="far fa-2x fa-star"></i></button>' +
+                        '<button title="Quitar de favoritos" class="botonFavorito" onclick="eliminarFavorito(\'' + resultados.sitios[i].id + '\',\'sitios\')"><i class="fas fa-2x fa-star"></i></button>' +
                         '</center>'
 
                     )
