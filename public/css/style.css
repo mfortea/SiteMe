@@ -490,6 +490,12 @@ button {
     font-weight: bold;
 }
 
+.favPopup {
+    font-size: 15px;
+    font-weight: bold;
+    color: #d39204;
+}
+
 .leaflet-popup-close-button {
     font: 20px Tahoma, Verdana, sans-serif !important;
     width: 25px !important;

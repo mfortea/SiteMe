@@ -8,8 +8,9 @@ var lng = 0;
 var rutas = null;
 var estado_ubicacion = false;
 
+
 function obtenerCoordenadas(seccion) {
-    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function (pos) {
+    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function(pos) {
         lat = pos.coords.latitude;
         lng = pos.coords.longitude;
         estado_ubicacion = true;
@@ -21,17 +22,17 @@ function obtenerCoordenadas(seccion) {
                 document.getElementById('input-busqueda').disabled = false;
                 document.getElementById('cargando').style.display = "block";
                 document.getElementById('map').style.display = "block";
-            break;
+                break;
 
             case "sitios":
                 document.getElementById("estado").innerHTML = "Ubicación activada";
                 document.getElementById('cargando').style.display = "block";
                 document.getElementById('map').style.display = "block";
-            break;
+                break;
         }
 
         generarMapa(seccion);
-    }, function (objPositionError) {
+    }, function(objPositionError) {
         // Cacheo de errores relacionados con la ubicación
         switch (objPositionError.code) {
             case objPositionError.PERMISSION_DENIED:
@@ -118,7 +119,7 @@ function generarMapa(seccion) {
         var marcadorUbActual = L.marker([lat, lng], { icon: iconoUbActual }).bindPopup('<p class="tituloPopup">Tu ubicación</h2>').addTo(map);
         arrayMarcadores.push(marcadorUbActual);
 
-        if (seccion === "sitios"){
+        if (seccion === "sitios") {
             obtenerFavoritos();
         }
 
@@ -130,7 +131,7 @@ function generarMapa(seccion) {
 }
 
 function medirDistancia(lat1, lon1, lat2, lon2) {
-    rad = function (x) { return x * Math.PI / 180; }
+    rad = function(x) { return x * Math.PI / 180; }
     var R = 6378.137; //Radio de la tierra en km
     var dLat = rad(lat2 - lat1);
     var dLong = rad(lon2 - lon1);
@@ -138,6 +139,38 @@ function medirDistancia(lat1, lon1, lat2, lon2) {
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c;
     return d.toFixed(2);
+}
+
+function eliminarFavorito(id, seccion) {
+
+    fetch('/eliminarFavorito/' + id, {
+        method: 'DELETE'
+    }).then(function(response) {
+        if (response.status === 204) {
+            document.getElementById("cuerpoModal").innerHTML = "Se ha eliminado correctamente";
+            document.getElementById("simboloModal").className = "fas fa-trash-alt fa-3x";
+            vibrar(300);
+            sonidoOK()
+            switch (seccion) {
+                case "busqueda":
+                    favoritos = null;
+                    ultimaBusqueda();
+                    ultimaBusqueda();
+                    break;
+                case "sitios":
+                    recargarMapa();
+                    break;
+            }
+            MicroModal.show('modal');
+
+        } else if (response.status === 404) {
+            document.getElementById("cuerpoModal").innerHTML = "No se ha podido eliminar el sitio";
+            document.getElementById("simboloModal").className = "fas fa-times fa-3x";
+            sonidoError();
+            vibrar(300);
+            MicroModal.show('modal');
+        }
+    })
 }
 
 
