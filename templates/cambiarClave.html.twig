@@ -28,8 +28,8 @@
         {{ form_row(form.save) }}
 
     {{ form_end(form) }}
-
-
+        <br>
+        <button type="button" onclick="window.location.href = '{{ path('ajustes') }}'" class="btn btn-secondary btn-sm"><i class="fas fa-arrow-circle-left"></i> &nbsp; Volver a Ajustes</button>
         <p class="mt-5 mb-3 text-muted">&copy; SiteMe - {{ "now"|date("Y") }}</p>
     </div>
 </body>
