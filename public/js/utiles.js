@@ -141,37 +141,7 @@ function medirDistancia(lat1, lon1, lat2, lon2) {
     return d.toFixed(2);
 }
 
-function eliminarFavorito(id, seccion) {
 
-    fetch('/eliminarFavorito/' + id, {
-        method: 'DELETE'
-    }).then(function(response) {
-        if (response.status === 204) {
-            document.getElementById("cuerpoModal").innerHTML = "Se ha eliminado correctamente";
-            document.getElementById("simboloModal").className = "fas fa-trash-alt fa-3x";
-            vibrar(300);
-            sonidoOK()
-            switch (seccion) {
-                case "busqueda":
-                    favoritos = null;
-                    ultimaBusqueda();
-                    ultimaBusqueda();
-                    break;
-                case "sitios":
-                    recargarMapa();
-                    break;
-            }
-            MicroModal.show('modal');
-
-        } else if (response.status === 404) {
-            document.getElementById("cuerpoModal").innerHTML = "No se ha podido eliminar el sitio";
-            document.getElementById("simboloModal").className = "fas fa-times fa-3x";
-            sonidoError();
-            vibrar(300);
-            MicroModal.show('modal');
-        }
-    })
-}
 
 
 /*

@@ -1069,6 +1069,7 @@ class MockApiSitios implements IApiSitios {
               $objeto->nombre = $nombre;
               $objeto->icono = $icono;
               $objeto->direccion = $direccion;
+              $objeto->favorito = false;
   
               $resultado->sitios[$i] = $objeto;
           }

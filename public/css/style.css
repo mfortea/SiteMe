@@ -462,6 +462,48 @@ button {
     transition-timing-function: linear;
 }
 
+.botonFavorito i {
+    -webkit-animation: 0.6s paused animacionFavorito alternate ease-in-out;
+    -moz-animation: 0.6s paused animacionFavorito alternate ease-in-out;
+    animation: 0.6s paused animacionFavorito alternate ease-in-out;
+}
+
+@keyframes animacionFavorito {
+    1% {
+        transform: scale(1) rotate(10deg);
+    }
+    50% {
+        transform: scale(2) rotate(90deg);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes animacionFavorito {
+    1% {
+        -webkit-transform: scale(1) rotate(10deg);
+    }
+    50% {
+        -webkit-transform: scale(2) rotate(90deg);
+    }
+    100% {
+        -webkit-transform: scale(1);
+    }
+}
+
+@-moz-keyframes animacionFavorito {
+    1% {
+        -moz-transform: scale(1) rotate(10deg);
+    }
+    50% {
+        -moz-transform: scale(2) rotate(90deg);
+    }
+    100% {
+        -moz-transform: scale(1);
+    }
+}
+
 .botonFavorito:hover {
     cursor: pointer;
     color: #ffae00;
@@ -469,7 +511,7 @@ button {
     transition-timing-function: linear;
 }
 
-.botonEliminar {
+.botonFavorito .botonEliminar {
     color: #940606;
     background-color: unset;
     transition-duration: 0.2s;

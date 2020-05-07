@@ -44,7 +44,7 @@ class MainController extends AbstractController {
     }
 
     public function buscarLugares( LoggerInterface $logger, Request $request, SitiosService $sitiosService ) {
-
+        $usuario = $this->get('security.token_storage')->getToken()->getUser();
         $json_raw = $request->getContent();
         $json = json_decode($json_raw);
 
@@ -56,7 +56,19 @@ class MainController extends AbstractController {
         $apiSitios = new MockApiSitios();
         $sitiosService->setApiSitios( $apiSitios );
 
-        return new JsonResponse( $sitiosService->getSitios( $latitud, $longitud, $busqueda, $radio ) );
+        $respuesta = $sitiosService->getSitios( $latitud, $longitud, $busqueda, $radio);
+        $numSitios = count( $respuesta->sitios);
+
+        $favoritos = $usuario->getFavoritos();
+
+        foreach($favoritos as $favorito) {
+            for ( $i = 0; $i < $numSitios; $i++ ) {
+                if($favorito->getIdSitio() == $respuesta->sitios[$i]->id ) {
+                    $respuesta->sitios[$i]->favorito = true;
+                }
+            }
+        }
+        return new JsonResponse($respuesta);
     }
 
     public function nuevoFavorito ( Request $request ) {
