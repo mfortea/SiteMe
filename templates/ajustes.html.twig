@@ -18,14 +18,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item m-2">
+                    <li class="nav-item active m-2">
                         <a class="nav-link" href="{{ path('busqueda') }}"><i class="fas fa-search"></i> &nbsp; Búsqueda </a>
                     </li>
-                    <li class="nav-item m-2">
+                    <li class="nav-item active m-2">
                         <a class="nav-link" href="{{ path('sitios') }}"><i class="fas fa-star"></i> &nbsp; Mis sitios <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item m-2 dropdown">
-                    <a class="nav-link active dropdown-toggle" href="{{ path('ajustes') }}" role="button" id="navbarDropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> &nbsp; Mi perfil</a>
+                    <a class="nav-link pagActual active dropdown-toggle" href="{{ path('ajustes') }}" role="button" id="navbarDropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> &nbsp; Mi perfil</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
                                 <li><a class="dropdown-item disabled" href="#">{{ app.user.username }}</a></li>
                                 <li><a class="dropdown-item" href="{{ path('ajustes') }}"><i class="fas fa-cog"></i> &nbsp; Ajustes de perfil</a></li>

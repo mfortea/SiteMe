@@ -21,6 +21,28 @@ nav {
     animation-duration: 1s;
 }
 
+nav li a:hover {
+    background-color: #1fa874 !important;
+    border-radius: 8px;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+    color: white !important;
+}
+
+.dropdown-toggle:hover {
+    background-color: #1fa874 !important;
+}
+
+.pagActual {
+    background-color: #177c55;
+    border-radius: 8px;
+    color: white !important;
+}
+
+.pagActual a {
+    color: white !important;
+}
+
 @media (max-width: 767px) {
     .navbar-nav {
         padding-top: .425rem;
