@@ -21,7 +21,7 @@ function eliminarFavoritos() {
             document.getElementById("cuerpoModal").innerHTML = "Se han eliminado tus favoritos correctamente";
             document.getElementById("simboloModal").className = "fas fa-check-circle fa-3x";
             vibrar(300);
-            sonidoOK();
+            sonidoEliminado();
             MicroModal.show('modal-estandar');
 
         } else if (response.status === 404) {
