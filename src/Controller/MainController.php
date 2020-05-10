@@ -15,6 +15,8 @@ use App\Entity\Usuario;
 use App\Entity\Favorito;
 use App\Form\Model\CambiarClave;
 use App\Form\CambiarClaveType;
+use App\Form\Model\CambiarEmail;
+use App\Form\CambiarEmailType;
 use App\Form\Model\EliminarUsuario;
 use App\Form\EliminarUsuarioType;
 use \stdClass;
@@ -218,6 +220,45 @@ class MainController extends AbstractController {
                     'form' => $form->createView(),
         ));
     }
+
+
+public function cambiarEmail(Request $request) {
+    $session = $request->getSession();
+    $modeloCambiarEmail = new CambiarEmail();
+    $form = $this->createForm(CambiarEmailType::class, $modeloCambiarEmail);
+
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted()) {
+
+        if ($form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $usuario = $this->getUser();
+            $encoder = $this->passwordEncoder;
+            $password = $encoder->encodePassword($usuario, $modeloCambiarEmail->getClave());
+            $nuevoEmail = $modeloCambiarEmail->getNuevoEmail();
+            $buscarUsuario = $entityManager->getRepository(Usuario::class)->findOneByEmail($nuevoEmail);
+            if($buscarUsuario){
+                $session->getFlashBag()->add('error', 'El email ya existe');
+            } else {
+                $usuario->setEmail($nuevoEmail);
+                $entityManager->persist($usuario);
+                $flush = $entityManager->flush();
+                if ($flush === null) {
+                    return $this->render('emailCambiado.html.twig');
+                } else {
+                    $session->getFlashBag()->add('warning', 'No se ha podido cambiar el email');
+                }
+            }
+
+        }
+    }
+
+    return $this->render('cambiarEmail.html.twig', array(
+                'form' => $form->createView(),
+    ));
+
+}
 
 
 public function eliminarUsuario(Request $request) {

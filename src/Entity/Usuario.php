@@ -6,9 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;  
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UsuarioRepository")
+ * @UniqueEntity("email")
  */
 class Usuario implements UserInterface
 {
@@ -20,9 +23,12 @@ class Usuario implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @var string $email
+     *
+     * @ORM\Column(name="email", type="string", length=255, unique=true)
+     * @Assert\Email()
      */
-    private $email;
+    protected $email;
 
     /**
      * @ORM\Column(type="json")

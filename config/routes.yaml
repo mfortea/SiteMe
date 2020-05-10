@@ -34,6 +34,10 @@ eliminarFavorito:
     controller: App\Controller\MainController::eliminarFavorito
     methods: ["DELETE"]
 
+cambiarEmail:
+    path: /cambiarEmail
+    controller: App\Controller\MainController::cambiarEmail
+
 cambiarClave:
     path: /cambiarClave
     controller: App\Controller\MainController::cambiarClave

@@ -42,6 +42,7 @@
             <div id="ajustes">
                 <h2>{{ app.user.username }}</h2>
                 <br>
+                <button type="button" onclick="window.location.href = '{{ path('cambiarEmail') }}'"  class="mb-2 btn-ajustes btn btn-lg btn-web"><i class="fas fa-user-edit"></i> &nbsp; Cambiar email</button><br>
                 <button type="button" onclick="window.location.href = '{{ path('cambiarClave') }}'"  class="mb-2 btn-ajustes btn btn-lg btn-web"><i class="fas fa-lock"></i> &nbsp; Cambiar contraseña</button><br>
                 <button type="button" onclick="window.location.href = '{{ path('app_logout') }}'" class="mb-2 btn-ajustes btn btn-lg btn-web"><i class="fas fa-sign-out-alt"></i> &nbsp; Cerrar sesión</button><br>
                 <button type="button" onclick="mostrarModal('modal-borrarsitios');" class="mb-2 btn-ajustes btn btn-lg btn-danger"><i class="fas fa-trash-alt"></i> &nbsp; Borrar todos los sitios</button><br>
