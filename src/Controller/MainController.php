@@ -19,6 +19,8 @@ use App\Form\Model\CambiarEmail;
 use App\Form\CambiarEmailType;
 use App\Form\Model\EliminarUsuario;
 use App\Form\EliminarUsuarioType;
+use App\Form\Model\Registro;
+use App\Form\RegistroType;
 use \stdClass;
 
 class MainController extends AbstractController {
@@ -31,6 +33,64 @@ class MainController extends AbstractController {
 
     public function index() {
         return $this->render( 'index.html.twig' );
+    }
+
+    public function registro ( Request $request ) {
+        $session = $request->getSession();
+        $modeloRegistro = new Registro();
+        $form = $this->createForm(RegistroType::class, $modeloRegistro);
+    
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted()) {
+    
+            if ($form->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $encoder = $this->passwordEncoder;
+                $password = $modeloRegistro->getClave();
+                $email = $modeloRegistro->getEmail();
+                $usuario = new Usuario();
+                $buscarUsuario = $entityManager->getRepository(Usuario::class)->findOneByEmail($email);
+                if($buscarUsuario){
+                $session->getFlashBag()->add('error', 'El email ya está registrado');
+                } else {
+                $usuario->setEmail( $email );
+                $usuario->setPassword( $this->passwordEncoder->encodePassword(
+                    $usuario, $password
+                ) );
+                $usuario->setRoles( array( 'ROLE_USER' ) );
+                $entityManager->persist($usuario);
+                $flush = $entityManager->flush();
+                if ($flush === null) {
+                    return $this->render('usuarioCreado.html.twig');
+                } else {
+                    $session->getFlashBag()->add('warning', 'No se ha podido crear el usuario');
+                }
+            }
+            }
+        }
+    
+        return $this->render('registro.html.twig', array(
+                    'form' => $form->createView(),
+        ));
+    
+    }
+
+    public function comprobarUsuario( Request $request ) {
+        $json_raw = $request->getContent();
+        $json = json_decode($json_raw);
+        $email = $json->email;
+        $entityManager = $this->getDoctrine()->getManager();
+        $buscarUsuario = $entityManager->getRepository(Usuario::class)->findOneByEmail($email);
+        if ($buscarUsuario){
+            return new JsonResponse([
+                'error' => 'El email ya está registrado'
+                ], 403);
+        } else {
+            return new JsonResponse(200);
+        }
+
+
     }
 
     public function busqueda() {
@@ -57,7 +117,6 @@ class MainController extends AbstractController {
 
         $apiSitios = new MockApiSitios();
         $sitiosService->setApiSitios( $apiSitios );
-
         $respuesta = $sitiosService->getSitios( $latitud, $longitud, $busqueda, $radio);
         $numSitios = count( $respuesta->sitios);
 

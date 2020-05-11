@@ -142,6 +142,45 @@ function medirDistancia(lat1, lon1, lat2, lon2) {
 }
 
 
+function comprobarUsuario(email) {
+    var error = document.getElementById("error");
+    var er = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
+
+    if (er.test(email.value) == false) {
+        error.classList.add("alert");
+        error.classList.add("alert-danger");
+        error.innerHTML = "El email no tiene un formato válido";
+    } else {
+        error.classList.remove("alert");
+        error.classList.remove("alert-danger");
+        error.innerHTML = "";
+        var peticion = { email: email.value };
+        var json = JSON.stringify(peticion);
+    
+        fetch("/comprobarUsuario", {
+            method: 'POST',
+            body: json,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(function (response) {
+            if (response.status === 200) {
+                error.classList.add("alert");
+                error.classList.add("alert-success");
+                error.innerHTML = "Disponible";
+    
+            } else if (response.status === 403) {
+                error.classList.add("alert");
+                error.classList.add("alert-danger");
+                error.innerHTML = "El email ya está registrado";
+    
+            }
+        })
+    }
+
+}
+
+
 
 
 /*

@@ -2,6 +2,10 @@ index:
     path: /
     controller: App\Controller\MainController::index
 
+registro:
+    path: /registro
+    controller: App\Controller\MainController::registro
+
 busqueda:
     path: /busqueda
     controller: App\Controller\MainController::busqueda
@@ -50,3 +54,9 @@ eliminarFavoritos:
 eliminarUsuario:
     path: /eliminarUsuario
     controller: App\Controller\MainController::eliminarUsuario
+
+comprobarUsuario:
+    path: /comprobarUsuario
+    controller: App\Controller\MainController::comprobarUsuario
+    methods: ["POST"]
+

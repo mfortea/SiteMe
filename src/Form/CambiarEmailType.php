@@ -15,7 +15,7 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 {
 
     $builder
-            ->add('nuevoEmail', EmailType::class, array('label' => ' Nuevo email', "attr" => array("class" => "form-email form-control", "placeholder" => "Escribe tu nuevo email")))
+            ->add('nuevoEmail', EmailType::class, array('label' => ' Nuevo email', "attr" => array("class" => "form-email form-control", "placeholder" => "Escribe tu nuevo email", "onkeyup" => "comprobarUsuario(this)")))
             ->add('clave', PasswordType::class, array('label' => 'Contraseña actual', "attr" => array("class" => "form-password form-control", "placeholder" => "Escribe tu contraseña actual")))
             ->add('save', SubmitType::class,
             array('label' => 'Cambiar email', "attr" => array("class" => "boton-login")))
@@ -25,7 +25,7 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 public function setDefaultOptions(OptionsResolverInterface $resolver)
 {
     $resolver->setDefaults(array(
-        'data_class' => 'Acme\UserBundle\Form\Model\CambiarClave',
+        'data_class' => 'Acme\UserBundle\Form\Model\CambiarEmail',
     ));
 }
 
