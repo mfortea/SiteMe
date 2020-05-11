@@ -12,6 +12,8 @@ function buscar() {
         map.off();
         map.remove();
         console.log("Mapa eliminado");
+        json_cache = "";
+        arrayMarcadores = [];
         generarMapa("busqueda");
     }
 
@@ -88,7 +90,7 @@ function buscar() {
 }
 
 function comprobarEstado(posicion) {
-    var posicionMarcador = parseInt(posicion) + 2;
+    var posicionMarcador = parseInt(posicion) + 1;
     var contenido =
         '<center>' +
         '<img width="30px" src="' + json_cache.sitios[posicion].icono + '"/>' +
@@ -121,7 +123,7 @@ function accionPopup(posicion) {
 
 
 function nuevoFavorito(posicion) {
-    var posicionMarcador = parseInt(posicion) + 2;
+    var posicionMarcador = parseInt(posicion) + 1;
     // Icono de los marcadores favoritos
     var iconoFavoritos = L.icon({
         iconUrl: 'imagenes/marcador_amarillo.png',
@@ -166,7 +168,7 @@ function nuevoFavorito(posicion) {
 
 function eliminarFavorito(posicion) {
     var id = json_cache.sitios[posicion].id;
-    var posicionMarcador = parseInt(posicion) + 2;
+    var posicionMarcador = parseInt(posicion) + 1;
 
     // Icono de los marcadores de la búsqueda
     var iconoUbBusqueda = L.icon({
