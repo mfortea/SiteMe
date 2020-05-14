@@ -3,9 +3,10 @@ namespace App\Form\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Registro {
+class Registro
+{
 
-protected $email;
+    protected $email;
 
 /**
  * @Assert\Length(
@@ -13,26 +14,28 @@ protected $email;
  *     minMessage = "La contraseña tiene que tener al menos 6 caracteres"
  * )
  */
-protected $clave;
+    protected $clave;
 
+    public function getClave()
+    {
+        return $this->clave;
+    }
 
-public function getClave() {
-    return $this->clave;
-}
+    public function setClave($clave)
+    {
+        $this->clave = $clave;
+        return $this;
+    }
 
-public function setClave($clave) {
-    $this->clave = $clave;
-    return $this;
-}
+    public function getEmail()
+    {
+        return $this->email;
+    }
 
-
-public function getEmail() {
-    return $this->email;
-}
-
-public function setEmail($email) {
-    $this->email = $email;
-    return $this;
-}
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
 
 }

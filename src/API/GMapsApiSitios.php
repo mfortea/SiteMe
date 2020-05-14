@@ -1,31 +1,34 @@
 <?php
 
 namespace App\API;
+
 use joshtronic;
-use \stdClass;
 use Symfony\Component\Dotenv\Dotenv;
+use \stdClass;
 
-class GMapsApiSitios implements IApiSitios {
+class GMapsApiSitios implements IApiSitios
+{
 
-    public function getSitios ( string $latitud, string $longitud, string $busqueda, string $radio ) {
+    public function getSitios(string $latitud, string $longitud, string $busqueda, string $radio)
+    {
 
         $dotenv = new Dotenv();
-        $dotenv->load( '../.env' );
+        $dotenv->load('../.env');
         $API_KEY = $_ENV['API_KEY'];
 
-        $google_places = new joshtronic\GooglePlaces( $API_KEY );
-        $google_places->location = array( $latitud, $longitud );
-        $google_places->radius   = $radio;
-        $google_places->keyword  = $busqueda;
-        $results                 = $google_places->nearbysearch();
+        $google_places = new joshtronic\GooglePlaces($API_KEY);
+        $google_places->location = array($latitud, $longitud);
+        $google_places->radius = $radio;
+        $google_places->keyword = $busqueda;
+        $results = $google_places->nearbysearch();
 
         $arrayResultados = $results['results'];
 
         $resultado = new stdClass();
 
-        $numSitios = count( $arrayResultados );
+        $numSitios = count($arrayResultados);
 
-        for ( $i = 0; $i<$numSitios; $i++ ) {
+        for ($i = 0; $i < $numSitios; $i++) {
 
             $sitio = $arrayResultados;
 

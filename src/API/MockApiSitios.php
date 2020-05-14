@@ -1,14 +1,17 @@
 <?php
 namespace App\API;
+
 use \stdClass;
 
-class MockApiSitios implements IApiSitios {
+class MockApiSitios implements IApiSitios
+{
 
-    public function getSitios ( string $latitud, string $longitud, string $busqueda, string $radio ) {
+    public function getSitios(string $latitud, string $longitud, string $busqueda, string $radio)
+    {
 
         $json = '{
             "html_attributions": [
-              
+
             ],
             "next_page_token": "CqQCIAEAAAzKLV0C7pWUjH9MtOJNn_9zM4ORjW4aa--vvCWzvyvQzBJmW30QNwA2EJQfwjM4ztLXsvLXHRQKQl9XIGe3FMV-LRR9gEtr07iiiBpxU3Wjgz1eoopmppdSLi-MQGDiu4IB7wYjz5ut62R6Ia59W8K5txtshtpypSVD2sOUcHRYbDndITOzqJ7P0FYM0TwxPFfr3E__jwDMw3e-Lxc_csiFWxMH62uzktFYATGA59z8VUzx2jG-NKzbB6cSS7RNLD7kqaVryjlxKvcmmyoc3XUF5PLVFMvPwGfiN6AL3yiXQTGbTSVT_DhU9YnUyto8oJsB4rbGzR-akVjDEl8yxeJ9wMUN0yRQBKT6Nma4DUpc8IdJ7F23ViVSg7YeZzQ1IhIQgT3v51j6uXU4A6ubA7MCxxoU8NFCHvRQbr9CkcMcL2cnTR-6Hs4",
             "results": [
@@ -1044,38 +1047,36 @@ class MockApiSitios implements IApiSitios {
             "status": "OK"
           }';
 
-          $objJson = json_decode($json);
+        $objJson = json_decode($json);
 
-          $resultado = new stdClass();
-  
-          $numSitios = count( $objJson->results);
+        $resultado = new stdClass();
 
-  
-          for ( $i = 0; $i<$numSitios; $i++ ) {
-  
-              $sitio = $objJson->results[$i];
-  
-              $id = $sitio->id;
-              $latitud = $sitio->geometry->location->lat;
-              $longitud = $sitio->geometry->location->lng;
-              $nombre = $sitio->name;
-              $icono = $sitio->icon;
-              $direccion = $sitio->vicinity;
-  
-              $objeto = new stdClass();
-              $objeto->id = $id;
-              $objeto->latitud = $latitud;
-              $objeto->longitud = $longitud;
-              $objeto->nombre = $nombre;
-              $objeto->icono = $icono;
-              $objeto->direccion = $direccion;
-              $objeto->favorito = false;
-  
-              $resultado->sitios[$i] = $objeto;
-          }
-  
-          return $resultado;
+        $numSitios = count($objJson->results);
 
+        for ($i = 0; $i < $numSitios; $i++) {
+
+            $sitio = $objJson->results[$i];
+
+            $id = $sitio->id;
+            $latitud = $sitio->geometry->location->lat;
+            $longitud = $sitio->geometry->location->lng;
+            $nombre = $sitio->name;
+            $icono = $sitio->icon;
+            $direccion = $sitio->vicinity;
+
+            $objeto = new stdClass();
+            $objeto->id = $id;
+            $objeto->latitud = $latitud;
+            $objeto->longitud = $longitud;
+            $objeto->nombre = $nombre;
+            $objeto->icono = $icono;
+            $objeto->direccion = $direccion;
+            $objeto->favorito = false;
+
+            $resultado->sitios[$i] = $objeto;
+        }
+
+        return $resultado;
 
     }
 }
