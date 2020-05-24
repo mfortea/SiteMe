@@ -200,29 +200,37 @@ class MainController extends AbstractController
         $respuesta = new stdClass();
         $numSitios = count($favoritos);
 
-        for ($i = 0; $i < $numSitios; $i++) {
+        if ($numSitios < 1) {
+            return new JsonResponse(null, 204);
 
-            $sitio = $favoritos;
+        } else {
 
-            $id = $favoritos[$i]->getIdSitio();
-            $latitud = $favoritos[$i]->getLatitud();
-            $longitud = $favoritos[$i]->getLongitud();
-            $nombre = $favoritos[$i]->getNombre();
-            $icono = $favoritos[$i]->getIcono();
-            $direccion = $favoritos[$i]->getDireccion();
+            for ($i = 0; $i < $numSitios; $i++) {
 
-            $objeto = new stdClass();
-            $objeto->id = $id;
-            $objeto->latitud = $latitud;
-            $objeto->longitud = $longitud;
-            $objeto->nombre = $nombre;
-            $objeto->icono = $icono;
-            $objeto->direccion = $direccion;
+                $sitio = $favoritos;
 
-            $respuesta->sitios[$i] = $objeto;
+                $id = $favoritos[$i]->getIdSitio();
+                $latitud = $favoritos[$i]->getLatitud();
+                $longitud = $favoritos[$i]->getLongitud();
+                $nombre = $favoritos[$i]->getNombre();
+                $icono = $favoritos[$i]->getIcono();
+                $direccion = $favoritos[$i]->getDireccion();
+
+                $objeto = new stdClass();
+                $objeto->id = $id;
+                $objeto->latitud = $latitud;
+                $objeto->longitud = $longitud;
+                $objeto->nombre = $nombre;
+                $objeto->icono = $icono;
+                $objeto->direccion = $direccion;
+
+                $respuesta->sitios[$i] = $objeto;
+            }
+
+            return new JsonResponse($respuesta, 200);
+
         }
 
-        return new JsonResponse($respuesta, 200);
     }
 
     public function eliminarFavorito($idSitio)
