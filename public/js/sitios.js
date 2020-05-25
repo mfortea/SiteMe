@@ -111,14 +111,16 @@ function eliminarFavoritos() {
             document.getElementById("eliminarFavoritos").style.display = "none";
             for (let i = 1; i < arrayMarcadores.length; i++) {
                 arrayMarcadores[i].remove();
-
             }
             arrayMarcadores = [];
             MicroModal.show("modal-estandar");
         } else if (response.status === 404) {
+            document.getElementById("cuerpoModal").innerHTML =
+                "No se han podido eliminar tus sitios";
+            document.getElementById("simboloModal").className = "fas fa-times fa-3x";
             sonidoError();
             vibrar(300);
-            mostrarModal("modal-error");
+            MicroModal.show("modal");
         }
     });
 }
