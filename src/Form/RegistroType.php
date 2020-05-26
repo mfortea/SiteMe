@@ -38,6 +38,6 @@ class RegistroType extends AbstractType
 
     public function getName()
     {
-        return 'change_passwd';
+        return 'registro';
     }
 }

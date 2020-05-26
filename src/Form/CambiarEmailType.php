@@ -30,6 +30,6 @@ class CambiarEmailType extends AbstractType
 
     public function getName()
     {
-        return 'change_passwd';
+        return 'cambiar_email';
     }
 }
