@@ -1,37 +1,47 @@
 {% extends 'base.html.twig' %}
 {% form_theme form 'form_errors.html.twig' %}
-{% block titulo %}{{ parent() }} - Cambiar contraseña{% endblock %}
+{% block titulo %}
+	{{ parent() }}
+	- Cambiar contraseña
+{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/micromodal.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/all.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/micromodal.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/all.min.css') }}"/>
 {% endblock %}
 {% block body %}
-<body class="text-center body-login">
+	<body class="text-center body-login">
+		<div class="form-login">
+			<img class="mb-4" src="imagenes/logo_letras.png" alt="Logo de SiteMe" height="72"/>
+			<h1 class="h3 mb-3">
+				Cambiar contraseña
+			</h1>
 
-    <div class="form-login">
-        <img class="mb-4" src="imagenes/logo_letras.png" alt="Logo de SiteMe" height="72" />
-        <h1 class="h3 mb-3 ">Cambiar contraseña</h1>
+			{{ form_start(form) }}
 
-    {{ form_start(form) }}
-    
-        {{ form_label(form.claveAnterior) }}
-        {{ form_widget(form.claveAnterior) }}
-        {{ form_errors(form.claveAnterior) }}
+			{{ form_label(form.claveAnterior) }}
+			{{ form_widget(form.claveAnterior) }}
+			{{ form_errors(form.claveAnterior) }}
 
-        {{ form_label(form.clave.first) }}
-        {{ form_widget(form.clave.first) }}
+			{{ form_label(form.clave.first) }}
+			{{ form_widget(form.clave.first) }}
 
-        {{ form_label(form.clave.second) }}
-        {{ form_widget(form.clave.second) }}
-        {{ form_errors(form.clave.first) }}
+			{{ form_label(form.clave.second) }}
+			{{ form_widget(form.clave.second) }}
+			{{ form_errors(form.clave.first) }}
 
-        {{ form_row(form.save) }}
+			{{ form_row(form.save) }}
 
-    {{ form_end(form) }}
-        <br>
-        <button type="button" onclick="window.location.href = '{{ path('ajustes') }}'" class="btn btn-secondary btn-sm"><i class="fas fa-arrow-circle-left"></i> &nbsp; Volver a Ajustes</button>
-        <p class="mt-5 mb-3 text-muted">&copy; SiteMe - {{ "now"|date("Y") }}</p>
-    </div>
-</body>
+			{{ form_end(form) }}
 
+			<br/>
+			<button type="button" onclick="window.location.href = '{{ path('ajustes') }}'" class="btn btn-secondary btn-sm">
+				<i class="fas fa-arrow-circle-left"></i>
+				&nbsp; Volver a Ajustes
+			</button>
+			<p class="mt-5 mb-3 text-muted">
+				&copy; SiteMe -
+				{{ 'now'|date('Y') }}
+			</p>
+		</div>
+	</body>
 {% endblock %}

@@ -1,94 +1,87 @@
 {% extends 'base.html.twig' %}
 
-{% block titulo %}{{ parent() }}{% endblock %}
-{% block pwa %}
-    <link rel="manifest" href="manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="SiteMe">
-    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/icon-152x152.png">
-    <meta name="msapplication-TileImage" content="/images/icons/icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#1c9b6a">
-    <meta name="theme-color" content="#c6c6c6">
-{% block stylesheets %}
-
+{% block titulo %}
+	{{ parent() }}
 {% endblock %}
+{% block pwa %}
+	<link rel="manifest" href="manifest.json">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="SiteMe">
+	<link rel="apple-touch-icon" sizes="152x152" href="/images/icons/icon-152x152.png">
+	<meta name="msapplication-TileImage" content="/images/icons/icon-144x144.png">
+	<meta name="msapplication-TileColor" content="#1c9b6a">
+	<meta name="theme-color" content="#c6c6c6">
+	{% block stylesheets %}{% endblock %}
 {% endblock %}
 
 {% block body %}
 
- <noscript>
-        <h2>El uso de Javascript es necesario</h2>
-    </noscript>
+	<noscript>
+		<h2>El uso de Javascript es necesario</h2>
+	</noscript>
 
-    <div class="container-fluid">
-        <div class="banner-principal">
-            <img id="img-index" alt="Logo de SiteMe" src="imagenes/logo_letras.png" width="250px" />
-            <br><br>
-            <h2>Tus sitios favoritos en un mismo lugar</h2>
-            <br>
-            <button onclick="window.location.href = '{{ path('app_login') }}'" class="boton">Iniciar sesión</button>
-        </div>
+	<div class="container-fluid">
+		<div class="banner-principal">
+			<img id="img-index" alt="Logo de SiteMe" src="imagenes/logo_letras.png" width="250px"/>
+			<br><br>
+			<h2>Tus sitios favoritos en un mismo lugar</h2>
+			<br>
+			<button onclick="window.location.href = '{{ path('app_login') }}'" class="boton">Iniciar sesión</button>
+		</div>
 
-    <div class="container caracteristicas">
-        <hr class="divisor-pequeno">
+		<div class="container caracteristicas">
+			<hr class="divisor-pequeno">
 
-        <div class="row">
-            <div class="col-md-7">
-                <h2 class="caracteristica-cabecera ">Accede a tus sitios favoritos.<span class="text-muted"> Desde donde quieras</span></h2>
-                <p class="lead">SiteMe se adapta a cualquier pantalla, puedes ver tus sitios favoritos desde tu ordenador de escritorio, 
-                portátil, tablet o smartphone sin importar cuál sea el tamaño de su pantalla. Además, podrás instalar SiteMe en dispositivos con navegadores compatibles* </p>
-             <p class="subindice">*Las Aplicaciones Web progresivas solo se pueden instalar en dispositivos con el navegador Google Chrome versión 67 o posterior, o un dispositivo con iOS 11.3 en adelante a través de Safari</p>
-            </div>
-            <div class="col-md-5">
-                <img class="img-fluid mx-auto" src="imagenes/caracteristica-1.png" alt="Captura de pantalla de la pantalla de búsqueda de SiteMe">
-            </div>
-        </div>
+			<div class="row">
+				<div class="col-md-7">
+					<h2 class="caracteristica-cabecera ">Accede a tus sitios favoritos.<span class="text-muted">
+							Desde donde quieras</span>
+					</h2>
+					<p class="lead">SiteMe se adapta a cualquier pantalla, puedes ver tus sitios favoritos desde tu ordenador de escritorio, 
+																		                portátil, tablet o smartphone sin importar cuál sea el tamaño de su pantalla. Además, podrás instalar SiteMe en dispositivos con navegadores compatibles*
+					</p>
+					<p class="subindice">*Las Aplicaciones Web progresivas solo se pueden instalar en dispositivos con el navegador Google Chrome versión 67 o posterior, o un dispositivo con iOS 11.3 en adelante a través de Safari</p>
+				</div>
+				<div class="col-md-5">
+					<img class="img-fluid mx-auto" src="imagenes/caracteristica-1.png" alt="Captura de pantalla de la pantalla de búsqueda de SiteMe">
+				</div>
+			</div>
 
-        <hr class="divisor">
+			<hr class="divisor">
 
-        <div class="row">
-            <div class="col-md-7 order-md-2">
-                <h2 class="caracteristica-cabecera ">Desde un bar, un restaurante ...<span class="text-muted"> Hasta un banco</span></h2>
-                <p class="lead">Con SiteMe podrás guardar cualquier sitio cercano que te interese, simplemente escribiendo el tipo de establecimiento
-                que buscas, podrás ver todos los que se encuentran cerca de tí, y guardarlo en tus favoritos para consultarlo siempre que quieras.</p>
-            </div>
-            <div class="col-md-5 order-md-1">
-                <img class="img-fluid mx-auto" src="imagenes/caracteristica-2.png" alt="Generic placeholder image">
-            </div>
-        </div>
+			<div class="row">
+				<div class="col-md-7 order-md-2">
+					<h2 class="caracteristica-cabecera ">Desde un bar, un restaurante ...<span class="text-muted">
+							Hasta un banco</span>
+					</h2>
+					<p class="lead">Con SiteMe podrás guardar cualquier sitio cercano que te interese, simplemente escribiendo el tipo de establecimiento
+																		                que buscas, podrás ver todos los que se encuentran cerca de tí, y guardarlo en tus favoritos para consultarlo siempre que quieras.</p>
+				</div>
+				<div class="col-md-5 order-md-1">
+					<img class="img-fluid mx-auto" src="imagenes/caracteristica-2.png" alt="Generic placeholder image">
+				</div>
+			</div>
 
-        <hr class="divisor">
-       
-
-        </div>
-
-
-
-
-
-    </div>
-
-    <!-- PIE DE LA PÁGINA -->
-    <footer class="text-center">
-        <p class="mt-5 mb-3 text-muted">&copy; SiteMe {{ "now"|date("Y") }}</span>
-    </footer>
+			<hr class="divisor">
 
 
+		</div>
 
-{% endblock %}
+	</div>
 
-{% block javascripts %}
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker
-                    .register('{{ asset('service-worker.js') }}')
-                    .then(reg => console.log('[Service Worker] * Registrado.'))
-                    .catch(err => console.log(`[Service Worker] * Error: ${err}`));
-            });
-        }
-    </script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-{% endblock %}
+	<!-- PIE DE LA PÁGINA -->
+	<footer class="text-center">
+		<p class="mt-5 mb-3 text-muted">&copy; SiteMe{{ "now"|date("Y") }}
+		</p>
+	</span>
+</footer>{% endblock %}{% block javascripts %}
+<script>
+	if ('serviceWorker' in navigator) {
+window.addEventListener('load', () => {
+navigator.serviceWorker.register('{{ asset('service-worker.js') }}').then(reg => console.log('[Service Worker] * Registrado.')).catch(err => console.log (`[Service Worker] * Error: ${err}`));
+});
+}
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>{% endblock %}

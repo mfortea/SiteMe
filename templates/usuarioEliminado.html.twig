@@ -1,29 +1,33 @@
 {% extends 'base.html.twig' %}
-{% block titulo %}{{ parent() }} - Redirigiendo...{% endblock %}
+{% block titulo %}
+	{{ parent() }}
+	- Redirigiendo...
+{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/all.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/all.min.css') }}"/>
 {% endblock %}
 {% block body %}
-    <body class="text-center" onload="redireccionar()">
+	<body class="text-center" onload="redireccionar()">
 
-        <img class="mb-4" src="imagenes/logo_letras.png" alt="Logo de SiteMe" height="72" />
-        <br><br>
-        <i class="fas fa-check-circle fa-5x"></i>
-        <br><br>
-        <h2>Se ha eliminado su cuenta de SiteMe correctamente</h2>
-        <h3>¡Esperamos volver a verte!</h3>
-        <br>
-        <h4>Redirigiendo ... <h4>
-        <br>
-        <p class="mt-5 mb-3 text-muted">&copy; SiteMe - {{ "now"|date("Y") }}</p>
-        <script>
-        function redireccionar(){
-            setTimeout( function() { 
-                window.location.href = "{{ path('index') }}"; }, 5000 );
-            }
-        </script>
-    </body>
-{% endblock %}
-{% block javascripts %}
-
-{% endblock %}
+		<img class="mb-4" src="imagenes/logo_letras.png" alt="Logo de SiteMe" height="72"/>
+		<br><br>
+		<i class="fas fa-check-circle fa-5x"></i>
+		<br><br>
+		<h2>Se ha eliminado su cuenta de SiteMe correctamente</h2>
+		<h3>¡Esperamos volver a verte!</h3>
+		<br>
+		<h4>Redirigiendo ...
+			<h4>
+				<br>
+				<p class="mt-5 mb-3 text-muted">&copy; SiteMe -
+					{{ "now"|date("Y") }}</p>
+				<script>
+					function redireccionar() {
+                        setTimeout(function () {
+                        window.location.href = "{{ path('index') }}";
+                        }, 5000);
+                    }
+				</script>
+			</body>
+		{% endblock %}
+		{% block javascripts %}{% endblock %}

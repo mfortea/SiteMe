@@ -1,34 +1,40 @@
 {% extends 'base.html.twig' %}
 {% form_theme form 'form_errors.html.twig' %}
-{% block titulo %}{{ parent() }} - Eliminar cuenta{% endblock %}
+{% block titulo %}
+	{{ parent() }}
+	- Eliminar cuenta
+{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/micromodal.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/all.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/micromodal.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/all.min.css') }}"/>
 {% endblock %}
 {% block body %}
-<body class="text-center body-login">
+	<body class="text-center body-login">
 
-    <div class="form-login">
-        <img class="mb-4" src="imagenes/logo_letras.png" alt="Logo de SiteMe" height="72" />
-        <h1 class="h3 mb-3 ">Eliminar cuenta</h1>
-        <div class="alert alert-warning" role="alert">ESTA ACCIÓN NO PODRÁ DESHACERSE</div>
-        <p>Introduce tu contraseña para confirmar</p>
-        
+		<div class="form-login">
+			<img class="mb-4" src="imagenes/logo_letras.png" alt="Logo de SiteMe" height="72"/>
+			<h1 class="h3 mb-3 ">Eliminar cuenta</h1>
+			<div class="alert alert-warning" role="alert">ESTA ACCIÓN NO PODRÁ DESHACERSE</div>
+			<p>Introduce tu contraseña para confirmar</p>
 
-    {{ form_start(form) }}
-    
-        {{ form_label(form.clave) }}
-        {{ form_widget(form.clave) }}
-        {{ form_errors(form.clave) }}
+			{{ form_start(form) }}
 
-        {{ form_row(form.save) }}
+			{{ form_label(form.clave) }}
+			{{ form_widget(form.clave) }}
+			{{ form_errors(form.clave) }}
 
-    {{ form_end(form) }}
-    <br>
+			{{ form_row(form.save) }}
 
-    <button type="button" onclick="window.location.href = '{{ path('ajustes') }}'" class="btn btn-secondary btn-sm"><i class="fas fa-arrow-circle-left"></i> &nbsp; Volver a Ajustes</button>
-    <p class="mt-5 mb-3 text-muted">&copy; SiteMe - {{ "now"|date("Y") }}</p>
-    </div>
-</body>
+			{{ form_end(form) }}
+			<br>
+
+			<button type="button" onclick="window.location.href = '{{ path('ajustes') }}'" class="btn btn-secondary btn-sm">
+				<i class="fas fa-arrow-circle-left"></i>
+				&nbsp; Volver a Ajustes</button>
+			<p class="mt-5 mb-3 text-muted">&copy; SiteMe -
+				{{ "now"|date("Y") }}</p>
+		</div>
+
+	</body>
 
 {% endblock %}

@@ -1,44 +1,48 @@
 {% extends 'base.html.twig' %}
 {% form_theme form 'form_errors.html.twig' %}
-{% block titulo %}{{ parent() }} - Nuevo usuario{% endblock %}
+{% block titulo %}
+	{{ parent() }}
+	- Nuevo usuario
+{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/micromodal.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/all.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/micromodal.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/all.min.css') }}"/>
 {% endblock %}
 {% block body %}
-<body class="text-center body-login">
+	<body class="text-center body-login">
 
-    <div class="form-login">
-        <a href='{{ path('index') }}'><img class="mb-4" src="imagenes/logo_letras.png" alt="Logo de SiteMe" height="72" /></a>
-        <h1 class="h3 mb-3 ">Registro de nuevo usuario</h1>
+		<div class="form-login">
+			<a href='{{ path('index') }}'><img class="mb-4" src="imagenes/logo_letras.png" alt="Logo de SiteMe" height="72"/></a>
+			<h1 class="h3 mb-3 ">Registro de nuevo usuario</h1>
 
-    {{ form_start(form) }}
+			{{ form_start(form) }}
 
-        {{ form_label(form.email) }}
-        {{ form_widget(form.email) }}
-        {{ form_errors(form.email) }}
-        {% for flashMessage in app.session.flashbag.get('error') %}
-            <div class="alert alert-danger" role="alert">{{ flashMessage }}</div>
-        {% endfor %}
-        <div id="error" role="alert"></div>
-        
-        {{ form_label(form.clave.first) }}
-        {{ form_widget(form.clave.first) }}
-        {{ form_label(form.clave.second) }}
-        {{ form_widget(form.clave.second) }}
-        {{ form_errors(form.clave.first) }}
+			{{ form_label(form.email) }}
+			{{ form_widget(form.email) }}
+			{{ form_errors(form.email) }}
+			{% for flashMessage in app.session.flashbag.get('error') %}
+				<div class="alert alert-danger" role="alert">{{ flashMessage }}</div>
+			{% endfor %}
+			<div id="error" role="alert"></div>
 
-        <br>
-        
-        {{ form_row(form.save) }}
+			{{ form_label(form.clave.first) }}
+			{{ form_widget(form.clave.first) }}
+			{{ form_label(form.clave.second) }}
+			{{ form_widget(form.clave.second) }}
+			{{ form_errors(form.clave.first) }}
 
-    {{ form_end(form) }}
-        <br>
-        <p class="mt-5 mb-3 text-muted">&copy; SiteMe - {{ "now"|date("Y") }}</p>
-    </div>
-</body>
+			<br>
+
+			{{ form_row(form.save) }}
+
+			{{ form_end(form) }}
+			<br>
+			<p class="mt-5 mb-3 text-muted">&copy; SiteMe -
+				{{ "now"|date("Y") }}</p>
+		</div>
+	</body>
 
 {% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('js/utiles.js') }}"></script>
+	<script src="{{ asset('js/utiles.js') }}"></script>
 {% endblock %}

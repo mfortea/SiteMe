@@ -1,95 +1,124 @@
 {% extends 'base.html.twig' %}
 
-{% block titulo %}{{ parent() }} - Búsqueda{% endblock %}
+{% block titulo %}
+	{{ parent() }}
+	- Búsqueda
+{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/micromodal.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/all.min.css') }}" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/Control.FullScreen.css') }}" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/micromodal.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/all.min.css') }}"/>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/Control.FullScreen.css') }}"/>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"/>
 {% endblock %}
 
 {% block body %}
- <noscript>
-        <h2>El uso de Javascript es necesario</h2>
-    </noscript>
-    <body onload="obtenerCoordenadas('busqueda')">
-        <nav id="menu" class="navbar navbar-expand-md navbar-light fixed-top text-center">
-            <a class="navbar-brand" href="{{ path('busqueda') }}"><img alt="Logo de SiteMe" class="p-3" src="imagenes/logo_letras.png" width="200px" /></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item pagActual active m-2">
-                        <a class="nav-link" href="{{ path('busqueda') }}"><i class="fas fa-search"></i> &nbsp; Búsqueda <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active m-2">
-                        <a class="nav-link" href="{{ path('sitios') }}"><i class="fas fa-star"></i> &nbsp; Mis sitios</a>
-                    </li>
-                    <li class="nav-item active m-2 dropdown">
-                    <a class="nav-link dropdown-toggle" href="{{ path('ajustes') }}" role="button" id="navbarDropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> &nbsp; Mi perfil</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                                <li><a class="dropdown-item disabled" href="#">{{ app.user.username }}</a></li>
-                                <li><a class="dropdown-item" href="{{ path('ajustes') }}"><i class="fas fa-cog"></i> &nbsp; Ajustes de perfil</a></li>
-                                <li><a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i> &nbsp; Cerrar sesión</a></li>
-                        </ul>
-			        </li>
-                </ul>
-            </div>
-        </nav>
+	<noscript>
+		<h2>El uso de Javascript es necesario</h2>
+	</noscript>
+	<body onload="obtenerCoordenadas('busqueda')">
+		<nav id="menu" class="navbar navbar-expand-md navbar-light fixed-top text-center">
+			<a class="navbar-brand" href="{{ path('busqueda') }}"><img alt="Logo de SiteMe" class="p-3" src="imagenes/logo_letras.png" width="200px"/></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item pagActual active m-2">
+						<a class="nav-link" href="{{ path('busqueda') }}">
+							<i class="fas fa-search"></i>
+							&nbsp; Búsqueda
+							<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item active m-2">
+						<a class="nav-link" href="{{ path('sitios') }}">
+							<i class="fas fa-star"></i>
+							&nbsp; Mis sitios</a>
+					</li>
+					<li class="nav-item active m-2 dropdown">
+						<a class="nav-link dropdown-toggle" href="{{ path('ajustes') }}" role="button" id="navbarDropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-user"></i>
+							&nbsp; Mi perfil</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+							<li>
+								<a class="dropdown-item disabled" href="#">{{ app.user.username }}</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('ajustes') }}">
+									<i class="fas fa-cog"></i>
+									&nbsp; Ajustes de perfil</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{ path('app_logout') }}">
+									<i class="fas fa-sign-out-alt"></i>
+									&nbsp; Cerrar sesión</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
 
-        <div class="separador"></div>
-        <div class="container-fluid mt-5 text-center">
-            <h1>¿Qué sitios buscas?</h1>
-            <br>
-            <form action="javascript:buscar()">
-            <div class="row">
-                <div class="col-sm-12">
-                    <input id="input-busqueda" name="input-busqueda" disabled class="input-busqueda mb-3 text-center" placeholder="Por ejemplo: Restaurantes" type="text" autofocus required />
-                </div>
+		<div class="separador"></div>
+		<div class="container-fluid mt-5 text-center">
+			<h1>¿Qué sitios buscas?</h1>
+			<br>
+			<form action="javascript:buscar()">
+				<div class="row">
+					<div class="col-sm-12">
+						<input id="input-busqueda" name="input-busqueda" disabled class="input-busqueda mb-3 text-center" placeholder="Por ejemplo: Restaurantes" type="text" autofocus required/>
+					</div>
 
-                <div class="col-sm-12">
-                    <button disabled id="boton-buscar" class="boton" type="submit">Buscar</button>
-                </div>
-                <br>
-            </div>
-            </form>
-            <br><br>
-            <div id="map">
-                <h3 id="cargando" class="cargando text-center mt-5"><i class="fas fa-hourglass-half"></i> &nbsp; Cargando mapa...</h3>
-            </div>
-        </div>
-    </body>
+					<div class="col-sm-12">
+						<button disabled id="boton-buscar" class="boton" type="submit">Buscar</button>
+					</div>
+					<br>
+				</div>
+			</form>
+			<br><br>
+			<div id="map">
+				<h3 id="cargando" class="cargando text-center mt-5">
+					<i class="fas fa-hourglass-half"></i>
+					&nbsp; Cargando mapa...</h3>
+			</div>
+		</div>
+	</body>
 
-    <!-- Ventana modal para errores-->
-    <div class="modal micromodal-slide" id="modal" aria-hidden="true">
-        <div class="modal__overlay" tabindex="-1">
-            <div class="modal__container text-center" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-                <main class="modal__content" id="modal-1-content">
-                    <i id="simboloModal"></i>
-                    <br><br>
-                    <h3 id="cuerpoModal"></h3>
-                </main>
-                <button class="boton" data-micromodal-close aria-label="Cerrar"><i class="fas fa-times-circle"></i> &nbsp; Cerrar</button>
-            </div>
-        </div>
-    </div>
+	<!-- Ventana modal para errores-->
+	<div class="modal micromodal-slide" id="modal" aria-hidden="true">
+		<div class="modal__overlay" tabindex="-1">
+			<div class="modal__container text-center" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+				<main class="modal__content" id="modal-1-content">
+					<i id="simboloModal"></i>
+					<br><br>
+					<h3 id="cuerpoModal"></h3>
+				</main>
+				<button class="boton" data-micromodal-close aria-label="Cerrar">
+					<i class="fas fa-times-circle"></i>
+					&nbsp; Cerrar</button>
+			</div>
+		</div>
+	</div>
 
-    <!-- PIE DE LA PÁGINA -->
-    <footer class="text-center">
-        <p class="mt-5 mb-3 text-muted">&copy; SiteMe {{ "now"|date("Y") }} - <span id="estado">Ubicación desactivada</span>
-    </footer>
+	<!-- PIE DE LA PÁGINA -->
+	<footer class="text-center">
+		<p class="mt-5 mb-3 text-muted">&copy; SiteMe
+			{{ "now"|date("Y") }}
+			-
+			<span id="estado">Ubicación desactivada</span>
+		</p>
+	</footer>
 
 
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('js/utiles.js') }}"></script>
-    <script src="{{ asset('js/busqueda.js') }}"></script>
-    <script src="{{ asset('js/efectosInterfaz.js') }}"></script>
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
-    <script src="{{ asset('js/Control.FullScreen.js') }}"></script>
-    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+	<script src="{{ asset('js/utiles.js') }}"></script>
+	<script src="{{ asset('js/busqueda.js') }}"></script>
+	<script src="{{ asset('js/efectosInterfaz.js') }}"></script>
+	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+	<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+	<script src="{{ asset('js/Control.FullScreen.js') }}"></script>
+	<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 {% endblock %}
