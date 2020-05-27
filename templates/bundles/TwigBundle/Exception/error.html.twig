@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block titulo %}
+	{{ parent() }}
+	- Error en el servidor
+{% endblock %}
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/all.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}"/>
+{% endblock %}
+{% block body %}
+	<body class="text-center error-body">
+		<img class="mb-4" src="imagenes/logo_letras.png" alt="Logo de SiteMe" height="50"/>
+		<br><br><br>
+		<img class="mb-4" src="imagenes/logo-error.gif" alt="Logo de SiteMe rojo" height="120"/>
+		<br><br>
+		<h1 class="error-mensaje">Error 500</h1>
+		<br>
+        <div class="error-div">
+            <h1>¡Vaya! Nuestro servidor no es perfecto ...<h1>
+            <h2 class="m-5">Es posible que el servidor se encuentre saturado, inténtalo de nuevo más tarde.</h2>
+            <br>
+        </div>
+		<button type="button" onclick="window.location.href = '{{ path('index') }}'" class="btn btn-secondary btn-lg"><i class="fas fa-arrow-circle-left"></i>&nbsp; Volver a Inicio</button>
+    	<br><br>
+        <p class="mt-5 mb-3 text-muted">&copy; SiteMe - {{ "now"|date("Y") }}</p>
+{% endblock %}

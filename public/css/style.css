@@ -54,8 +54,7 @@ nav li a:hover {
     .navbar-brand {
         float: right;
     }
-    .navbar-brand,
-    .navbar-nav .nav-item {
+    .navbar-brand, .navbar-nav .nav-item {
         display: block;
     }
     .navbar-nav .nav-item+.nav-item {
@@ -86,11 +85,9 @@ nav li a:hover {
     box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
 }
 
-.dropdown-item.active,
-.dropdown-item:active {
+.dropdown-item.active, .dropdown-item:active {
     background-color: #4d7662 !important;
 }
-
 
 /* Para navegadores que soporten el efecto blur */
 
@@ -146,8 +143,7 @@ button {
     width: 300px;
 }
 
-.input-busqueda:disabled,
-.input-busqueda[disabled] {
+.input-busqueda:disabled, .input-busqueda[disabled] {
     cursor: default;
     background-color: #cccccc;
     color: #666666;
@@ -182,7 +178,6 @@ button {
         color: black;
     }
 }
-
 
 /* Estilos para la scrollbar */
 
@@ -227,7 +222,6 @@ button {
 ::-webkit-scrollbar-corner {
     background: transparent;
 }
-
 
 /* ESTILOS DE INICIO */
 
@@ -279,8 +273,7 @@ button {
     transition: 0.5s;
 }
 
-.boton:disabled,
-.boton[disabled] {
+.boton:disabled, .boton[disabled] {
     cursor: default;
     background-color: #cccccc;
     color: #666666;
@@ -333,7 +326,6 @@ button {
         margin-top: 7rem;
     }
 }
-
 
 /* ESTILOS DEL LOGIN */
 
@@ -409,7 +401,6 @@ button {
     -moz-box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
 }
-
 
 /* ESTILOS DE BUSQUEDA */
 
@@ -570,7 +561,6 @@ button {
     font-weight: bold !important;
 }
 
-
 /* ESTILOS DE AJUSTES */
 
 .btn-web {
@@ -617,5 +607,56 @@ button {
     #ajustes h2 {
         font-size: 20px;
         color: rgb(148, 148, 148);
+    }
+}
+
+/* ESTILOS PARA LOS MENSAJES DE ERROR */
+
+.error-body {
+    background-color: white !important;
+}
+
+.error-mensaje {
+    font-weight: bold;
+    color: rgb(155, 3, 3);
+    -webkit-animation: 0.6s animacionError alternate ease-in-out;
+    -moz-animation: 0.6s animacionError alternate ease-in-out;
+    animation: 0.6s animacionError alternate ease-in-out;
+}
+
+
+@keyframes animacionError {
+    1% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes animacionError {
+    1% {
+        -webkit-transform: scale(1);
+    }
+    50% {
+        -webkit-transform: scale(2);
+    }
+    100% {
+        -webkit-transform: scale(1);
+    }
+}
+
+@-moz-keyframes animacionError {
+    1% {
+        -moz-transform: scale(1);
+    }
+    50% {
+        -moz-transform: scale(2);
+    }
+    100% {
+        -moz-transform: scale(1);
     }
 }
