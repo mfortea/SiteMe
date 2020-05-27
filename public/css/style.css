@@ -151,12 +151,42 @@ button {
 }
 
 #radio {
-    height: 40px;
-    border-color: #4d7662;
-    border-width: 2px;
-    font-size: 18px;
-    border-style: solid;
-    border-radius: 8px;
+    width: 300px;
+}
+
+.pDistancia{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #177c55;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #177c55;
+    cursor: pointer;
 }
 
 .cargando {
@@ -430,6 +460,9 @@ button {
     .input-busqueda {
         width: 100%;
     }
+    #radio {
+        width: 100%;
+    }
     #img-index {
         width: 100%;
     }
@@ -623,7 +656,6 @@ button {
     -moz-animation: 0.6s animacionError alternate ease-in-out;
     animation: 0.6s animacionError alternate ease-in-out;
 }
-
 
 @keyframes animacionError {
     1% {
