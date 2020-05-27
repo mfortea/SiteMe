@@ -20,10 +20,9 @@ DirectoryIndex index.php
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    ##Force SSL 
 
-    #Normal way (in case you need to deploy to NON-heroku)
-    RewriteCond %{HTTPS} !=on
+    RewriteCond %{REQUEST_URI}::$0 ^(/.+)/(.*)::\2$
+    RewriteRule .* - [E=BASE:%1]
 
     #Heroku way
     RewriteCond %{HTTP:X-Forwarded-Proto} !https 
