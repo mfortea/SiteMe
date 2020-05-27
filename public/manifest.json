@@ -5,7 +5,7 @@
     "background_color": "#1c9b6a",
     "display": "standalone",
     "Scope": "/",
-    "start_url": "https://localhost:8000",
+    "start_url": "https://shielded-garden-47881.herokuapp.com/",
     "icons": [{
             "src": "imagenes/icons/icon-72x72.png",
             "sizes": "72x72",
