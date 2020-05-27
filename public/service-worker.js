@@ -1,8 +1,9 @@
+'use strict';
 const CACHE_NAME = 'siteme-cache';
 
 // Archivos necesarios para el funcionamiento offline
 const CACHE_ASSETS = [
-    './'
+    '/offline.html',
 ];
 
 // INSTALL
