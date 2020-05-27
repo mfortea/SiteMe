@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\API\MockApiSitios;
+use App\API\GMapsApiSitios;
 use App\Entity\Favorito;
 use App\Entity\Usuario;
 use App\Form\CambiarClaveType;
@@ -20,6 +21,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use \stdClass;
+use Symfony\Component\Dotenv\Dotenv;
 
 class MainController extends AbstractController
 {
@@ -121,7 +123,18 @@ class MainController extends AbstractController
         $busqueda = $json->busqueda;
         $radio = $json->radio;
 
-        $apiSitios = new MockApiSitios();
+        $dotenv = new Dotenv();
+        $dotenv->load('../.env');
+        $TIPO_API = $_ENV['TIPO_API'];
+
+        $apiSitios = null;
+
+        if ($TIPO_API === "gmaps") {
+            $apiSitios = new GMapsApiSitios();
+        } elseif ($TIPO_API === "mock") {
+            $apiSitios = new MockApiSitios();
+        }
+
         $sitiosService->setApiSitios($apiSitios);
         $respuesta = $sitiosService->getSitios($latitud, $longitud, $busqueda, $radio);
         $numSitios = count($respuesta->sitios);

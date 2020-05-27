@@ -31,7 +31,7 @@ function buscar() {
 
     var busqueda = document.getElementById("input-busqueda").value;
     //radio = document.getElementById("radio").value;
-    var radio = "25000";
+    var radio = "5000";
 
     var datos = { busqueda: busqueda, radio: radio, lat: lat, lng: lng };
     var json = JSON.stringify(datos);
