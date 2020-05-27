@@ -11,7 +11,7 @@ var estado_ubicacion = false;
 function obtenerCoordenadas(seccion) {
     if (navigator.geolocation)
         navigator.geolocation.getCurrentPosition(
-            function (pos) {
+            function(pos) {
                 lat = pos.coords.latitude;
                 lng = pos.coords.longitude;
                 estado_ubicacion = true;
@@ -21,6 +21,7 @@ function obtenerCoordenadas(seccion) {
                         document.getElementById("estado").innerHTML = "Ubicación activada";
                         document.getElementById("boton-buscar").disabled = false;
                         document.getElementById("input-busqueda").disabled = false;
+                        document.getElementById("radio").disabled = false;
                         document.getElementById("cargando").style.display = "block";
                         document.getElementById("map").style.display = "block";
                         break;
@@ -34,7 +35,7 @@ function obtenerCoordenadas(seccion) {
 
                 generarMapa(seccion);
             },
-            function (objPositionError) {
+            function(objPositionError) {
                 // Cacheo de errores relacionados con la ubicación
                 switch (objPositionError.code) {
                     case objPositionError.PERMISSION_DENIED:
@@ -73,9 +74,9 @@ function obtenerCoordenadas(seccion) {
                         MicroModal.show("modal");
                 }
             }, {
-            maximumAge: 75000,
-            timeout: 15000,
-        }
+                maximumAge: 75000,
+                timeout: 15000,
+            }
         );
 }
 
@@ -149,7 +150,7 @@ function generarMapa(seccion) {
 }
 
 function medirDistancia(lat1, lon1, lat2, lon2) {
-    rad = function (x) {
+    rad = function(x) {
         return (x * Math.PI) / 180;
     };
     var R = 6378.137; //Radio de la tierra en km
@@ -187,7 +188,7 @@ function comprobarUsuario(email) {
             headers: {
                 "Content-Type": "application/json",
             },
-        }).then(function (response) {
+        }).then(function(response) {
             if (response.status === 200) {
                 error.classList.add("alert");
                 error.classList.add("alert-success");
@@ -208,7 +209,7 @@ function mostrarModal(nombreModal) {
 }
 
 function cerrarModal(nombreModal) {
-    setTimeout(function () {
+    setTimeout(function() {
         MicroModal.close(nombreModal);
     }, 500);
 }

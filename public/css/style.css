@@ -54,7 +54,8 @@ nav li a:hover {
     .navbar-brand {
         float: right;
     }
-    .navbar-brand, .navbar-nav .nav-item {
+    .navbar-brand,
+    .navbar-nav .nav-item {
         display: block;
     }
     .navbar-nav .nav-item+.nav-item {
@@ -85,9 +86,11 @@ nav li a:hover {
     box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
 }
 
-.dropdown-item.active, .dropdown-item:active {
+.dropdown-item.active,
+.dropdown-item:active {
     background-color: #4d7662 !important;
 }
+
 
 /* Para navegadores que soporten el efecto blur */
 
@@ -143,7 +146,8 @@ button {
     width: 300px;
 }
 
-.input-busqueda:disabled, .input-busqueda[disabled] {
+.input-busqueda:disabled,
+.input-busqueda[disabled] {
     cursor: default;
     background-color: #cccccc;
     color: #666666;
@@ -154,7 +158,8 @@ button {
     width: 300px;
 }
 
-.pDistancia{
+.pDistancia {
+    color: black;
     font-size: 20px;
     font-weight: bold;
 }
@@ -209,6 +214,7 @@ button {
     }
 }
 
+
 /* Estilos para la scrollbar */
 
 ::-webkit-scrollbar {
@@ -252,6 +258,7 @@ button {
 ::-webkit-scrollbar-corner {
     background: transparent;
 }
+
 
 /* ESTILOS DE INICIO */
 
@@ -303,7 +310,8 @@ button {
     transition: 0.5s;
 }
 
-.boton:disabled, .boton[disabled] {
+.boton:disabled,
+.boton[disabled] {
     cursor: default;
     background-color: #cccccc;
     color: #666666;
@@ -356,6 +364,7 @@ button {
         margin-top: 7rem;
     }
 }
+
 
 /* ESTILOS DEL LOGIN */
 
@@ -431,6 +440,7 @@ button {
     -moz-box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 15px 39px -16px rgba(0, 0, 0, 0.75);
 }
+
 
 /* ESTILOS DE BUSQUEDA */
 
@@ -594,6 +604,7 @@ button {
     font-weight: bold !important;
 }
 
+
 /* ESTILOS DE AJUSTES */
 
 .btn-web {
@@ -642,6 +653,7 @@ button {
         color: rgb(148, 148, 148);
     }
 }
+
 
 /* ESTILOS PARA LOS MENSAJES DE ERROR */
 
