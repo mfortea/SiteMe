@@ -66,16 +66,13 @@ DirectoryIndex index.php
     </IfModule>
 </IfModule>
 
-RewriteEngine On
+##Force SSL 
 
-# If we receive a forwarded http request from a proxy...
-RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
-
-# ...or just a plain old http request directly from the client
-RewriteCond %{HTTP:X-Forwarded-Proto} =""
+#Normal way (in case you need to deploy to NON-heroku)
 RewriteCond %{HTTPS} !=on
 
-# Redirect to https version
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#Heroku way
+RewriteCond %{HTTP:X-Forwarded-Proto} !https 
 
-# Put the rest of your rewrite rules here
+#If neither above conditions are met, redirect to https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
