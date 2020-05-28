@@ -15,8 +15,13 @@ SiteMe funciona haciendo uso de los siguientes frameworks o librerías:
 - Librería Micromodal.js para usar ventanas modales
 - Iconos de FontAwesome
 
-## Datos de prueba
-Para el entorno de desarrollo, las credenciales válidas son:
-- Email: usuario@email.com
-- Contraseña: usuario
-- Rol: ROLE_USER
+
+## Despliegue
+Para acceder al despliegue de la aplicación, puedes utilizar el **siguiente código QR desde tu smartphone:**
+
+<img src="public/imagenes/QR-SiteMe.png" alt="Código QR que contiene el enlace de SiteMe" width="300"/>
+
+*Puede ser instalada en dispositivos con el navegador Google Chrome versión 67 o posterior, o un dispositivo con iOS 11.3 en adelante a través de Safari.*
+
+
+**O bien accediendo [desde aquí](https://siteme-app.herokuapp.com/)**
