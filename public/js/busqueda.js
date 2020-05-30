@@ -184,6 +184,8 @@ function accionPopup(posicion) {
 
 function nuevoFavorito(posicion) {
   var posicionMarcador = parseInt(posicion) + 1
+  var botonFavorito = document.getElementById(posicion)
+  botonFavorito.classList.add('animacionFavoritoCargando')
   // Icono de los marcadores favoritos
   var iconoFavoritos = L.icon({
     iconUrl: 'imagenes/marcador_amarillo.png',
@@ -222,8 +224,7 @@ function nuevoFavorito(posicion) {
       var botonFavorito = document.getElementById(posicion)
       botonFavorito.firstElementChild.classList.remove('far')
       botonFavorito.firstElementChild.classList.add('fas')
-      botonFavorito.firstElementChild.style.WebkitAnimationPlayState = 'running'
-      botonFavorito.firstElementChild.style.AnimationPlayState = 'running'
+      botonFavorito.classList.add('animacionFavoritoCambio')
       setTimeout(function () {
         comprobarEstado(posicion)
       }, 1000)
@@ -234,6 +235,8 @@ function nuevoFavorito(posicion) {
 function eliminarFavorito(posicion) {
   var id = json_cache.sitios[posicion].id
   var posicionMarcador = parseInt(posicion) + 1
+  var botonFavorito = document.getElementById(posicion)
+  botonFavorito.classList.add('animacionFavoritoCargando')
 
   // Icono de los marcadores de la búsqueda
   var iconoUbBusqueda = L.icon({
@@ -253,8 +256,7 @@ function eliminarFavorito(posicion) {
       var botonFavorito = document.getElementById(posicion)
       botonFavorito.firstElementChild.classList.remove('fas')
       botonFavorito.firstElementChild.classList.add('far')
-      botonFavorito.firstElementChild.style.WebkitAnimationPlayState = 'running'
-      botonFavorito.firstElementChild.style.AnimationPlayState = 'running'
+      botonFavorito.classList.add('animacionFavoritoCambio')
       setTimeout(function () {
         comprobarEstado(posicion)
       }, 700)
