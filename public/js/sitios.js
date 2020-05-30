@@ -49,7 +49,9 @@ function obtenerFavoritos() {
                         json_cache.sitios[i].longitud
                     ) +
                     " kilómetros</p>" +
-                    '<button title="Quitar de favoritos" class="botonFavorito" onclick="eliminarFavorito(\'' +
+                    '<button id="' +
+                    i +
+                    '" title="Quitar de favoritos" class="botonFavorito" onclick="eliminarFavorito(\'' +
                     i +
                     '\')"><i class="fas fa-2x fa-star"></i></button>' +
                     "</center>"
@@ -72,6 +74,8 @@ function obtenerFavoritos() {
 function eliminarFavorito(posicion) {
     var id = json_cache.sitios[posicion].id;
     var posicionMarcador = parseInt(posicion) + 1;
+    var botonFavorito = document.getElementById(posicion)
+    botonFavorito.classList.add('animacionFavoritoCargando')
 
     fetch("/eliminarFavorito/" + id, {
         method: "DELETE",
