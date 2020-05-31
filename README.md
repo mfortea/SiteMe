@@ -5,7 +5,7 @@ Proyecto final para el ciclo formativo de Desarrollo de Aplicaciones Web (DAW).
 
 SiteMe es una aplicación web que permite al usuario descubrir establecimientos y lugares cercanos según un criterio de búsqueda, y almacenarlos en su cuenta para consultarlos siempre que quiera.
 
-## Componentes de la aplicación
+## Tecnologías utilizadas
 SiteMe funciona haciendo uso de los siguientes frameworks o librerías:
 - Framework de PHP Symfony 5
 - API de Google Maps Sites
@@ -25,3 +25,9 @@ Para acceder al despliegue de la aplicación, puedes utilizar el **siguiente có
 
 
 **O bien accediendo [desde aquí](https://siteme-app.herokuapp.com/)**
+
+## Aviso 
+Este proyecto es educativo, y se encuentra pendiente de exposición, por lo que se debe tener en cuenta varios puntos:
+- *Debido a la limitación de peticiones de la versión gratuita de la API de Google Maps, **es posible que sus búsqueda obtengan el mismo resultado** almacenado de forma continua hasta que el Administrador las habilite* 
+- *Se recomienda no utilizar la aplicación como una "aplicación comercial completa", ya que pueden producirse cambios en el contenido, las cuentas de usuario ...*
+- *No se permite la creación "masiva" de cuentas desde una misma dirección IP, quedarán bloqueadas*
