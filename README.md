@@ -27,7 +27,7 @@ Para acceder al despliegue de la aplicación, puedes utilizar el **siguiente có
 **O bien accediendo [desde aquí](https://siteme-app.herokuapp.com/)**
 
 ## Aviso 
-Este proyecto es educativo, y se encuentra pendiente de exposición, por lo que se debe tener en cuenta varios puntos:
+Este proyecto es educativo, y se encuentra pendiente de exposición, por lo que se deben de tener en cuenta estos puntos:
 - *Debido a la limitación de peticiones de la versión gratuita de la API de Google Maps, **es posible que sus búsqueda obtengan el mismo resultado** almacenado de forma continua hasta que el Administrador las habilite* 
 - *Se recomienda no utilizar la aplicación como una "aplicación comercial completa", ya que pueden producirse cambios en el contenido, las cuentas de usuario ...*
 - *No se permite la creación "masiva" de cuentas desde una misma dirección IP, quedarán bloqueadas*
