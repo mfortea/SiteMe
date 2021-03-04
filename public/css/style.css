@@ -764,3 +764,33 @@ button {
     color: rgb(176, 176, 176);
     font-weight: normal;
 }
+
+
+/* MODO OSCURO AUTOMÁTICO*/
+
+@media (prefers-color-scheme: dark) { 
+
+body {
+    background-color: #1f1f1f !important;
+}
+
+a, h1, h2, p{
+    color: white !important;
+}
+
+.input-busqueda {
+    background-color: #1f1f1f !important;
+}
+
+    
+.modal__container {
+    background-color: #2f2f2f !important;
+}
+
+.rojo {
+    color:#ff2249 !important;
+}
+
+
+
+}
