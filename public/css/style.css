@@ -811,12 +811,25 @@ a, h1, h2, p, .input-busqueda, #cuerpoModal, #simboloModal{
 .alert-danger {
     color: #ffffff !important;
     background-color: #b92633 !important;
+    border-color: none;
 }
     
 .alert-warning {
     color: #2f2505 !important;
     background-color: #ffd141 !important;
+    border-color: none;
 }
 
+nav {
+    background-color: #1f1f1f !important;
+}
+
+.leaflet-control-zoom-in, .leaflet-control-zoom-out {
+    color: black !important;
+}
+
+.leaflet-control-attribution, .leaflet-control {
+    color: black !important;
+}
 
 }
