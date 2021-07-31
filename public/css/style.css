@@ -795,6 +795,10 @@ body {
     background-color: #1f1f1f !important;
 }
 
+.error-body {
+    background-color: #1d1d1d !important;
+}
+
 a, h1, h2, p, .input-busqueda, #cuerpoModal, #simboloModal{
     color: white !important;
 }
