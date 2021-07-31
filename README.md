@@ -26,6 +26,12 @@ Para acceder al despliegue de la aplicación, puedes utilizar el **siguiente có
 
 **O bien accediendo [desde aquí](https://siteme-app.herokuapp.com/)**
 
+## ✨ Nuevos cambios desde el fin del proyecto
+Desde que el proyecto fue expuesto se han añadido nuevos cambios a la app.
+- Nuevo modo oscuro/claro automático, que cambia según el tema del dispositivo.
+- Notificaciones web push disponibles. Canal de informe de nuevos cambios. Relacionado con mi proyecto de [servidor de notificaciones](https://github.com/mfortea/servidor-push)
+- Cambios visuales menores.
+
 ## ⚠️ Aviso 
 Este proyecto es educativo, por lo que se deben de tener en cuenta estos puntos:
 - *Debido a la limitación de peticiones de la versión gratuita de la API de Google Maps, **es posible que sus búsqueda obtengan el mismo resultado** almacenado de forma continua hasta que el Administrador las habilite* 
