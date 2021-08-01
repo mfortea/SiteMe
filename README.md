@@ -29,7 +29,7 @@ Para acceder al despliegue de la aplicación, puedes utilizar el **siguiente có
 ## ✨ Nuevos cambios desde el fin del proyecto
 Desde que el proyecto fue expuesto se han añadido nuevos cambios a la app.
 - Nuevo modo oscuro/claro automático, que cambia según el tema del dispositivo.
-- Notificaciones web push disponibles. Canal de informe de nuevos cambios. Relacionado con mi proyecto de [servidor de notificaciones](https://github.com/mfortea/servidor-push)
+- Notificaciones web push disponibles. Canal de informe de nuevos cambios con los clientes de la app. Relacionado con mi proyecto de [servidor de notificaciones](https://github.com/mfortea/servidor-push)
 - Cambios visuales menores.
 
 ## ⚠️ Aviso 
