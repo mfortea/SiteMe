@@ -16,7 +16,9 @@ SiteMe funciona haciendo uso de los siguientes frameworks o librerías:
 - Iconos de FontAwesome
 
 
-## 🚀 Despliegue
+## 🚀 Despliegue ## 
+⚠️ **EL SERVIDOR YA NO ESTÁ DISPONIBLE**
+
 Para acceder al despliegue de la aplicación, puedes utilizar el **siguiente código QR desde tu smartphone:**
 
 <img src="public/imagenes/QR-SiteMe.png" alt="Código QR que contiene el enlace de SiteMe" width="300"/>
